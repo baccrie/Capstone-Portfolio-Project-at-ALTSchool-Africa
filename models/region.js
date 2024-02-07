@@ -14,6 +14,17 @@ const regionSchema = new Schema(
         ref: "State",
       },
     ],
+
+    description: {
+      type: String,
+      required: true,
+    },
+
+    tribes: [
+      {
+        type: String,
+      },
+    ],
   },
   { timestamps: false }
 );
