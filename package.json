@@ -1,0 +1,21 @@
+{
+  "name": "capstone-portfolio-project-at-altschool-africa",
+  "version": "1.0.0",
+  "description": "Altschool Africa Capstone Project (locale api)",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [
+    "altschool",
+    "nodejs",
+    "locale",
+    "api",
+    "nigeria"
+  ],
+  "author": "Bakare Rilwan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
