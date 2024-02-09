@@ -7,6 +7,7 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.use("/api/v1/nigeria", localeRouter);
+
 app.get("/", (req, res) => {
   res.status(200).json({
     message: "api working...",
