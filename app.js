@@ -1,23 +1,30 @@
-const express = require("express");
-require("dotenv").config();
+const express = require('express');
+require('dotenv').config();
 
-const localeRouter = require("./routes/locale");
+const localeRouter = require('./routes/locale');
+const {
+  errorHandler,
+} = require('./middleware/error-handler');
+const {
+  notFound,
+} = require('./middleware/not-found');
 
 const app = express();
 const PORT = process.env.PORT;
 
-app.use("/api/v1/nigeria", localeRouter);
+app.use('/api/v1/nigeria', localeRouter);
 
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   res.status(200).json({
-    message: "api working...",
+    message: 'api working...',
   });
 });
 
-app.use((error, req, res, next) => {
-  res.status(500).json({ message: "an error occured" });
-});
+app.use(errorHandler);
+app.use(notFound);
 
 app.listen(PORT, () => {
-  console.log("Server is listening to port 8000....");
+  console.log(
+    'Server is listening to port 8000....'
+  );
 });
