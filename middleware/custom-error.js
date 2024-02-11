@@ -6,7 +6,7 @@ class customApiError extends Error {
 }
 
 const createCustomError = (message, STAUS) => {
-  return new CustomApiError(message, STAUS);
+  return new customApiError(message, STAUS);
 };
 
 module.exports = {
