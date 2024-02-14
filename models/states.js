@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const { model, Schema } = require("mongoose");
+const mongoose = require('mongoose');
+const { model, Schema } = require('mongoose');
 
 const stateSchema = new Schema(
   {
@@ -13,16 +13,22 @@ const stateSchema = new Schema(
       required: true,
     },
 
-    Region: {
+    region: {
       type: Schema.Types.ObjectId,
-      ref: "Region",
-      required: [true, "must be present"],
+      ref: 'Region',
+      required: [true, 'must be present'],
     },
+
+    ethnic_groups: [
+      {
+        type: String,
+      },
+    ],
 
     lgas: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Lga",
+        ref: 'Lga',
         required: [true],
       },
     ],
@@ -35,4 +41,4 @@ const stateSchema = new Schema(
   { timestamps: false }
 );
 
-module.exports = model("State", stateSchema);
+module.exports = model('State', stateSchema);

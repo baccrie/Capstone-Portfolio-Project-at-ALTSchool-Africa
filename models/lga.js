@@ -1,6 +1,6 @@
-const { ObjectId } = require("mongodb");
-const mongoose = require("mongoose");
-const { model, Schema } = require("mongoose");
+const { ObjectId } = require('mongodb');
+const mongoose = require('mongoose');
+const { model, Schema } = require('mongoose');
 
 const lgaSchema = new Schema(
   {
@@ -11,17 +11,17 @@ const lgaSchema = new Schema(
 
     state: {
       type: Schema.Types.ObjectId,
-      ref: "State",
+      ref: 'State',
       required: true,
     },
 
-    Region: {
+    region: {
       type: Schema.Types.ObjectId,
-      ref: "Region",
+      ref: 'Region',
       required: true,
     },
   },
   { timestamps: false }
 );
 
-module.exports = model("Lga", lgaSchema);
+module.exports = model('Lga', lgaSchema);

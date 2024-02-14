@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const { model, Schema } = require("mongoose");
+const mongoose = require('mongoose');
+const { model, Schema } = require('mongoose');
 
 const regionSchema = new Schema(
   {
@@ -11,7 +11,7 @@ const regionSchema = new Schema(
     states: [
       {
         type: Schema.Types.ObjectId,
-        ref: "State",
+        ref: 'State',
       },
     ],
 
@@ -20,7 +20,7 @@ const regionSchema = new Schema(
       required: true,
     },
 
-    tribes: [
+    major_ethnic_group: [
       {
         type: String,
       },
@@ -29,4 +29,4 @@ const regionSchema = new Schema(
   { timestamps: false }
 );
 
-module.exports = model("Region", regionSchema);
+module.exports = model('Region', regionSchema);
