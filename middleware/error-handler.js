@@ -1,11 +1,9 @@
-const {
-  customApiError,
-} = require('./custom-error');
+const { customApiError } = require('./custom-error');
 
 const errorHandler = (error, req, res, next) => {
   if (error instanceof customApiError) {
     return res.status(error.statusCode).json({
-      message: error.message,
+      msg: error.message,
     });
   }
 

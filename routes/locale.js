@@ -22,7 +22,7 @@ router.get('/lgas', getAllLgas);
 
 //specific endpoints
 router.get('/:region/lgas', lgasInRegion);
-router.get('/:state/lgas', lgasInState);
+router.get('/:region/:state/lgas', lgasInState);
 router.get('/:region/states', statesInRegion);
 
 module.exports = router;

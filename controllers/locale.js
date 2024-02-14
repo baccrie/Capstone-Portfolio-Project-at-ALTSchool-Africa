@@ -1,22 +1,25 @@
 // general endpoints controllers
 const getAllRegions = async (req, res, next) => {
   res.status(200).json({
-    message:
-      'get all regions endpoint successful...',
+    status: 'success',
+    nbHits: 0,
+    data: [],
   });
 };
 
 const getAllStates = async (req, res, next) => {
   res.status(200).json({
-    message:
-      'get all states endpoint successful...',
+    status: 'success',
+    nbHits: 0,
+    data: [],
   });
 };
 
 const getAllLgas = async (req, res, next) => {
   res.status(200).json({
-    message:
-      'get all lgas endpoint successful...',
+    status: 'success',
+    nbHits: 0,
+    data: [],
   });
 };
 
@@ -34,23 +37,25 @@ const lgasInRegion = (req, res, next) => {
     nbHits: 0,
     data: [],
   });
-
-  const lgasInState = (req, res, next) => {
-    res.status(200).json({
-      status: 'success',
-      nbHits: 0,
-      data: [],
-    });
-  };
-
-  const statesInRegion = (req, res, next) => {
-    res.status(200).json({
-      status: 'success',
-      nbHits: 0,
-      data: [],
-    });
-  };
 };
+
+const lgasInState = (req, res, next) => {
+  res.status(200).json({
+    status: 'success',
+    nbHits: 0,
+    data: [],
+  });
+};
+
+const statesInRegion = (req, res, next) => {
+  res.status(200).json({
+    status: 'success',
+    nbHits: 0,
+    data: [],
+  });
+};
+
+// exporting for use
 module.exports = {
   getAllRegions,
   getAllStates,
