@@ -13,10 +13,19 @@ const stateSchema = new Schema(
       required: true,
     },
 
-    region: {
-      type: Schema.Types.ObjectId,
-      ref: 'Region',
-      required: [true, 'must be present'],
+    slogan: {
+      type: String,
+      required: true,
+    },
+
+    established: {
+      type: String,
+      required: true,
+    },
+
+    area: {
+      type: String,
+      required: true,
     },
 
     ethnic_groups: [
@@ -25,6 +34,38 @@ const stateSchema = new Schema(
       },
     ],
 
+    population: {
+      total: String,
+      estimate: String,
+      Density: String,
+    },
+
+    region: {
+      type: Schema.Types.ObjectId,
+      ref: 'Region',
+      required: [true, 'must be present'],
+    },
+
+    postal_code: {
+      type: String,
+      required: true,
+    },
+
+    website: {
+      type: String,
+      required: true,
+    },
+
+    coordinate: {
+      type: String,
+      required: true,
+    },
+
+    description: {
+      type: String,
+      required: true,
+    },
+
     lgas: [
       {
         type: Schema.Types.ObjectId,
@@ -32,12 +73,8 @@ const stateSchema = new Schema(
         required: [true],
       },
     ],
-
-    slogan: {
-      type: String,
-      required: true,
-    },
   },
+
   { timestamps: false }
 );
 

@@ -1,9 +1,17 @@
+const Region = require('../models/region');
+const Lga = require('../models/lga');
+
 // general endpoints controllers
 const getAllRegions = async (req, res, next) => {
+  // const data = await Region.find({
+  //   name: { $regex: 'north-West', $options: 'i' },
+  // });
+
+  const data = await Lga.find().populate('region');
   res.status(200).json({
     status: 'success',
-    nbHits: 0,
-    data: [],
+    nbHits: data.length,
+    data: data,
   });
 };
 

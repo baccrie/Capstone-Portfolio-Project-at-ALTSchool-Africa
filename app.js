@@ -1,16 +1,13 @@
 // node modules
 const express = require('express');
 require('dotenv').config();
+const { connectDB } = require('./db/connect');
 
 // third party modules
 const localeRouter = require('./routes/locale');
 const authRouter = require('./routes/auth');
-const {
-  errorHandler,
-} = require('./middleware/error-handler');
-const {
-  notFound,
-} = require('./middleware/not-found');
+const { errorHandler } = require('./middleware/error-handler');
+const { notFound } = require('./middleware/not-found');
 
 // initializing express server
 const app = express();
@@ -30,8 +27,9 @@ app.get('/', (req, res) => {
 app.use(errorHandler);
 app.use(notFound);
 
-app.listen(PORT, () => {
-  console.log(
-    'Server is listening to port 8000....'
-  );
+connectDB(process.env.MONGODB_URI).then((res) => {
+  console.log(`Connection to db successful...`);
+  app.listen(PORT, () => {
+    console.log(`Server is listening to port ${PORT}....`);
+  });
 });
