@@ -1,40 +1,65 @@
 const Region = require('../models/region');
 const Lga = require('../models/lga');
 const State = require('../models/state');
+const { capitalize } = require('../utils/capitalize-first-letter');
 
 // errors
 const BadRequestError = require('../errors/bad-request');
 
 // general endpoints controllers
 const getAllRegions = async (req, res, next) => {
-  const data = await Region.find({}).populate('states', 'name');
-  res.status(200).json({
-    status: 'success',
-    nbHits: data.length,
-    data: data,
-  });
+  try {
+    const data = await Region.find({}).populate('states', 'name');
+    res.status(200).json({
+      status: 'success',
+      nbHits: data.length,
+      data: data,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const getAllStates = async (req, res, next) => {
-  const data = await State.find()
-    .populate('region', 'name')
-    .populate('lgas', 'name');
-  res.status(200).json({
-    status: 'success',
-    nbHits: data.length,
-    data,
-  });
+  try {
+    const data = await State.find()
+      .populate('region', 'name')
+      .populate('lgas', 'name');
+    res.status(200).json({
+      status: 'success',
+      nbHits: data.length,
+      data,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const getAllLgas = async (req, res, next) => {
-  const data = await Lga.find()
-    .populate('region', 'name')
-    .populate('state', 'name');
-  res.status(200).json({
-    status: 'success',
-    nbHits: data.length,
-    data: data,
-  });
+  let { limit, page } = req.query;
+  limit = Number(limit) || 50;
+  page = Number(page) || 1;
+
+  const skip = (page - 1) * limit;
+  try {
+    let lgas = Lga.find().populate('region', 'name').populate('state', 'name');
+    if (limit || page) {
+      lgas = lgas.skip(skip).limit(limit);
+    }
+
+    const data = await lgas;
+    if (data.length < 1) {
+      throw new BadRequestError('Invalid query provided...');
+    }
+
+    res.status(200).json({
+      status: 'success',
+      nbHits: data.length,
+      data: data,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 // search endpoint
@@ -163,65 +188,105 @@ const search = async (req, res, next) => {
 
 // specific endpoints controllers
 const lgasInRegion = async (req, res, next) => {
-  const { region } = req.params;
-  const getRegion = await Region.findOne({
-    name: { $regex: region, $options: 'i' },
-  });
+  // validate with joi
 
-  if (!getRegion) {
-    // throw error
-    return console.log('there is an error....');
+  let { region } = req.params;
+  try {
+    region = capitalize(region);
+    const getRegion = await Region.findOne({
+      name: region,
+    });
+
+    if (!getRegion) {
+      throw new BadRequestError('The region is invalid....');
+    }
+
+    const data = await Lga.find({
+      region: getRegion._id,
+    })
+      .select('name state')
+      .populate('state', 'name capital');
+    res.status(200).json({
+      status: 'success',
+      nbHits: data.length,
+      data,
+    });
+  } catch (error) {
+    next(error);
   }
-
-  const data = await Lga.find({
-    region: getRegion._id,
-  }).populate('state', 'name');
-  res.status(200).json({
-    status: 'success',
-    nbHits: data.length,
-    data,
-  });
 };
 
 const lgasInState = async (req, res, next) => {
-  const { state, region } = req.params;
+  let { state, region } = req.params;
 
-  // (if state is notin region) {
-  // // do this
-  // }
+  try {
+    state = capitalize(state);
+    region = capitalize(region);
 
-  const getState = await State.findOne({
-    name: { $regex: state, $options: 'i' },
-  });
+    const getRegion = await Region.findOne({
+      name: region,
+    });
+    const getState = await State.findOne({
+      name: state,
+    }).populate('region', 'name');
 
-  console.log(getState._id);
-  const data = await Lga.find({
-    state: getState._id,
-  });
+    // check region existence
+    if (!getRegion) {
+      throw new BadRequestError('The region is invalid...');
+    }
 
-  console.log(data);
-  res.status(200).json({
-    status: 'success',
-    nbHits: data.length,
-    data,
-  });
+    // check state existence
+    if (!getState) {
+      throw new BadRequestError('The state is invalid...');
+    }
+
+    console.log(getState.region.name, getRegion.name);
+    // check existence of state in region
+    if (!(getState.region.name === getRegion.name)) {
+      throw new BadRequestError(
+        'The state dosent exist for the particular region...'
+      );
+    }
+
+    const data = await Lga.find({
+      state: getState._id,
+      region: getRegion._id,
+    });
+    // console.log(data);
+    res.status(200).json({
+      status: 'success',
+      nbHits: data.length,
+      data,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 const statesInRegion = async (req, res, next) => {
-  const { region } = req.params;
+  let { region } = req.params;
+  try {
+    region = capitalize(region);
+    const getRegion = await Region.findOne({
+      name: region,
+    });
 
-  const getRegion = await Region.findOne({
-    name: { $regex: region, $options: 'i' },
-  });
+    if (!getRegion) {
+      throw new BadRequestError('The region is invalid....');
+    }
 
-  const data = await State.find({
-    region: getRegion._id,
-  }).populate('lgas', 'name');
-  res.status(200).json({
-    status: 'success',
-    nbHits: data.length,
-    data,
-  });
+    const data = await State.find({
+      region: getRegion._id,
+    }).populate('lgas', 'name');
+    res.status(200).json({
+      status: 'success',
+      nbHits: data.length,
+      data,
+    });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
 };
 
 // exporting for use

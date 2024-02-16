@@ -3,6 +3,7 @@ const { customApiError } = require('../errors/custom-error');
 const errorHandler = (error, req, res, next) => {
   if (error instanceof customApiError) {
     return res.status(error.statusCode).json({
+      status: 'failed',
       msg: error.message,
     });
   }
