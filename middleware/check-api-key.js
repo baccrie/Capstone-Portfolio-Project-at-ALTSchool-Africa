@@ -6,7 +6,7 @@ const checkApiKey = async (req, res, next) => {
     const apiKey = req.headers.apikey;
 
     if (!apiKey) {
-      throw new authenticationError('api key is missing');
+      throw new authenticationError('api key is missing in request header');
     }
 
     // validate key
@@ -15,7 +15,7 @@ const checkApiKey = async (req, res, next) => {
     });
 
     if (!check) {
-      throw new authenticationError('Unauthorized!!!');
+      throw new authenticationError('Invalid Api Key');
     }
     next();
   } catch (err) {

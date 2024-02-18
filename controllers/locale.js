@@ -211,7 +211,6 @@ const search = async (req, res, next) => {
       ...data._doc,
     });
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };

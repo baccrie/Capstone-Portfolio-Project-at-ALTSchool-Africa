@@ -4,26 +4,24 @@ const { model, Schema } = require('mongoose');
 const userSchema = new Schema({
   username: {
     type: String,
-    require: [true, 'username field cannot be empty'],
-    trim: true,
-    maxLength: 20,
+    required: true,
   },
 
   email: {
     type: String,
-    require: [true, 'Please provide an email address'],
+    required: [true, 'Please provide an email address'],
     unique: true,
   },
 
   password: {
     type: String,
-    require: [true, 'password cannot be empty'],
+    required: [true, 'password cannot be empty'],
     trim: true,
   },
 
   api_key: {
     type: String,
-    require: [true, 'api-key exists'],
+    required: [true, 'api-key exists'],
     unique: true,
   },
 });

@@ -9,7 +9,8 @@ const errorHandler = (error, req, res, next) => {
   }
 
   res.status(500).json({
-    msg: 'An unknwon error occured',
+    status: 'failed',
+    msg: 'Oops an error occured!!',
   });
 };
 

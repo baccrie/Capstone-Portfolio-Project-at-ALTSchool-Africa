@@ -11,7 +11,56 @@
       "url": "to be updated"
     }
   },
+
   "paths": {
+    "/api/v1/nigeria/auth/signup": {
+      "url": "/",
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Register new user and generate api-key",
+        "operationId": "signUp",
+
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSignUp"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SignUpResponse"
+                  },
+                  "title": "Response Get Regions Regions  Get"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
     "/api/v1/nigeria/regions": {
       "get": {
         "tags": ["General Endpoints"],
@@ -31,7 +80,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Region"
+                    "$ref": "#/components/schemas/RegionRes"
                   },
                   "title": "Response Get Regions Regions  Get"
                 }
@@ -39,12 +88,34 @@
             }
           },
 
-          "422": {
+          "400": {
             "description": "BadRequest Error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Unthentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
                 }
               }
             }
@@ -56,7 +127,7 @@
     "/api/v1/nigeria/states": {
       "get": {
         "tags": ["General Endpoints"],
-        "summary": "Get All Regions",
+        "summary": "Get All States",
         "operationId": "getStates",
         "security": [
           {
@@ -94,7 +165,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/State"
+                    "$ref": "#/components/schemas/StateRes"
                   },
                   "title": "Response Get States States  Get"
                 }
@@ -102,12 +173,34 @@
             }
           },
 
-          "422": {
+          "400": {
             "description": "BadRequest Error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Unthentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
                 }
               }
             }
@@ -157,7 +250,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Lga"
+                    "$ref": "#/components/schemas/LgaRes"
                   },
                   "title": "Response Get Lgas Lgas  Get"
                 }
@@ -165,12 +258,34 @@
             }
           },
 
-          "422": {
+          "400": {
             "description": "BadRequest Error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Unthentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
                 }
               }
             }
@@ -211,7 +326,6 @@
             }
           }
         ],
-
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -220,20 +334,42 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Lga"
+                    "$ref": "#/components/schemas/LgaRes"
                   },
-                  "title": "Response Get State Lga  Get"
+                  "title": "Response Get Lgas Lgas  Get"
                 }
               }
             }
           },
 
-          "422": {
+          "400": {
             "description": "BadRequest Error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Unthentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
                 }
               }
             }
@@ -273,7 +409,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Lga"
+                    "$ref": "#/components/schemas/LgaRes"
                   },
                   "title": "Response Get Regions Regions  Get"
                 }
@@ -281,12 +417,109 @@
             }
           },
 
-          "422": {
+          "400": {
             "description": "BadRequest Error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Unthentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/{region}/states": {
+      "get": {
+        "tags": ["Specific Endpoints"],
+        "summary": "Get All States in a region",
+        "operationId": "getRegionStates",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "region",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "region"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StateRes"
+                  },
+                  "title": "Response Get Regions State  Get"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Unthentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
                 }
               }
             }
@@ -298,6 +531,66 @@
 
   "components": {
     "schemas": {
+      "RegionRes": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "nbHits": {
+            "type": "integer",
+            "title": "nbHits"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Region"
+            },
+            "type": "array",
+            "title": "data"
+          }
+        }
+      },
+
+      "StateRes": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "nbHits": {
+            "type": "integer",
+            "title": "nbHits"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/State"
+            },
+            "type": "array",
+            "title": "data"
+          }
+        }
+      },
+
+      "LgaRes": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "nbHits": {
+            "type": "integer",
+            "title": "nbHits"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Lga"
+            },
+            "type": "array",
+            "title": "data"
+          }
+        }
+      },
+
       "Region": {
         "properties": {
           "name": {
@@ -306,7 +599,10 @@
           },
 
           "states": {
-            "type": "string",
+            "items": {
+              "$ref": "#/components/schemas/State"
+            },
+            "type": "array",
             "title": "states"
           },
 
@@ -316,7 +612,10 @@
           },
 
           "major_ethnic_group": {
-            "type": "string",
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
             "title": "major_ethnic_group"
           }
         },
@@ -347,22 +646,21 @@
             "title": "area"
           },
 
-          "ethnic_groups": [
-            {
-              "type": "string",
-              "required": true,
-              "title": "ethnic_groups"
-            }
-          ],
+          "ethnic_groups": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "ethnic_groups"
+          },
 
           "population": {
-            "type": "string",
+            "type": "object",
             "title": "population"
           },
 
           "region": {
-            "type": "string",
-            "title": "region"
+            "$ref": "#/components/schemas/Region"
           },
 
           "postal_code": {
@@ -386,13 +684,19 @@
           },
 
           "lgas": {
-            "type": "arrray",
+            "items": {
+              "$ref": "#/components/schemas/Lga"
+            },
+            "type": "array",
             "title": "lgas"
           },
 
           "institutions": {
-            "type": "string",
-            "title": "institutuons"
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "institutions"
           }
         },
         "type": "object",
@@ -423,8 +727,7 @@
           },
 
           "state": {
-            "type": "string",
-            "title": "state"
+            "$ref": "#/components/schemas/State"
           },
 
           "region": {
@@ -457,60 +760,97 @@
         "required": ["username", "email", "password"]
       },
 
-      "BadRequestError": {
+      "UserSignUp": {
         "properties": {
-          "detail": {
-            "items": {
-              "$ref": "#/components/schemas/ValidationError"
-            },
-            "type": "array",
-            "title": "Detail"
+          "username": {
+            "type": "string",
+            "title": "username"
+          },
+          "email": {
+            "type": "string",
+            "title": "email"
+          },
+          "password": {
+            "type": "string",
+            "title": "password"
           }
         },
         "type": "object",
-        "title": "HTTPValidationError"
+        "required": ["username", "email", "Password"],
+        "title": "UserSignup"
       },
 
-      "ValidationError": {
+      "SignUpResponse": {
         "properties": {
-          "loc": {
-            "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            },
-            "type": "array",
-            "title": "Location"
+          "status": {
+            "type": "string",
+            "title": "status"
           },
           "msg": {
             "type": "string",
-            "title": "Message"
+            "title": "msg"
           },
-          "type": {
+          "api_key": {
             "type": "string",
-            "title": "Error Type"
+            "title": "api_key"
           }
         },
         "type": "object",
-        "required": ["loc", "msg", "type"],
-        "title": "ValidationError"
+        "required": ["username", "email", "Password"],
+        "title": "SignUpResponse"
+      },
+
+      "BadRequestError": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "msg": {
+            "type": "string",
+            "title": "status"
+          }
+        },
+        "type": "object",
+        "title": "BadRequestError"
+      },
+
+      "AuthenticationError": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "msg": {
+            "type": "string",
+            "title": "status"
+          }
+        },
+        "type": "object",
+        "title": "AuthenticationError"
+      },
+
+      "ServerError": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "msg": {
+            "type": "string",
+            "title": "status"
+          }
+        },
+        "type": "object",
+        "title": "ServerError"
       }
     },
 
     "securitySchemes": {
-      "OAuth2PasswordBearer": {
-        "type": "oauth2",
-        "flows": {
-          "password": {
-            "scopes": {},
-            "tokenUrl": "login"
-          }
-        }
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "apikey"
       }
     }
   }

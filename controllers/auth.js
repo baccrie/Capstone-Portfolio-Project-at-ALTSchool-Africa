@@ -30,15 +30,16 @@ const signUp = async (req, res, next) => {
     const salt = await bcrypt.genSalt(12);
     const hashedPasskey = await bcrypt.hash(password, salt);
 
+    console.log(username, email, apiKey);
     // create new User
-    const newUser = new User({
+    const newUser = await User.create({
       username,
       email,
       password: hashedPasskey,
       api_key: apiKey,
     });
 
-    newUser.save();
+    //await newUser.save();
     console.log(newUser);
 
     res.status(201).json({
@@ -47,6 +48,7 @@ const signUp = async (req, res, next) => {
       api_key: apiKey,
     });
   } catch (err) {
+    console.log(err);
     next(err);
   }
 };
