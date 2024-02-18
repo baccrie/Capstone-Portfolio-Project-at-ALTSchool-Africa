@@ -2,6 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
+const checkApiKey = require('../middleware/check-api-key');
+
 const {
   getAllRegions,
   getAllStates,
@@ -13,16 +15,18 @@ const {
 } = require('../controllers/locale');
 
 // search endpoints
-router.get('/search', search);
+router.get('/search', checkApiKey, search);
 
-// general points
-router.get('/regions', getAllRegions);
-router.get('/states', getAllStates);
-router.get('/lgas', getAllLgas);
+// general endpoints
+router.get('/regions', checkApiKey, getAllRegions);
+router.get('/states', checkApiKey, getAllStates);
+router.get('/lgas', checkApiKey, getAllLgas);
 
 //specific endpoints
-router.get('/:region/lgas', lgasInRegion);
-router.get('/:region/:state/lgas', lgasInState);
-router.get('/:region/states', statesInRegion);
+router.get('/:region/lgas', checkApiKey, lgasInRegion);
+router.get('/:region/:state/lgas', checkApiKey, lgasInState);
+router.get('/:region/states', checkApiKey, statesInRegion);
+
+// admin endpoints
 
 module.exports = router;

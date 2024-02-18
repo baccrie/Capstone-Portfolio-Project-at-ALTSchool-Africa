@@ -1,5 +1,7 @@
 // node modules
 const express = require('express');
+const { rateLimit } = require('express-rate-limit');
+const cors = require('cors');
 require('dotenv').config();
 const { connectDB } = require('./db/connect');
 
@@ -13,8 +15,18 @@ const { notFound } = require('./middleware/not-found');
 const app = express();
 const PORT = process.env.PORT;
 
+const limiter = rateLimit({
+  max: 20,
+  windowMs: 60 * 60 * 1000,
+  message: 'Too many requests',
+});
+
 // middlewares
 app.use(express.json());
+app.use(cors());
+app.use(limiter);
+
+// api middlewares router
 app.use('/api/v1/nigeria', localeRouter);
 app.use('/api/v1/nigeria', authRouter);
 

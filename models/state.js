@@ -31,13 +31,14 @@ const stateSchema = new Schema(
     ethnic_groups: [
       {
         type: String,
+        required: true,
       },
     ],
 
     population: {
       total: String,
       estimate: String,
-      Density: String,
+      density: String,
     },
 
     region: {
@@ -71,6 +72,13 @@ const stateSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: 'Lga',
         required: [true],
+      },
+    ],
+
+    institutions: [
+      {
+        type: String,
+        required: true,
       },
     ],
   },

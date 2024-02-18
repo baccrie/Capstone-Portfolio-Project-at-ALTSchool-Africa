@@ -16,23 +16,35 @@ const signUp = async (req, res, next) => {
 
     const { username, email, password } = req.body;
 
-    // create user and save to db
+    // check if user exists
+    const checkUser = await User.findOne({
+      email,
+    });
+
+    if (checkUser) {
+      throw new BadRequestError('User with email already exists.');
+    }
+
+    // hash password and gen api-key
     const apiKey = genApiKey.genApiKey();
     const salt = await bcrypt.genSalt(12);
     const hashedPasskey = await bcrypt.hash(password, salt);
+
+    // create new User
     const newUser = new User({
       username,
       email,
       password: hashedPasskey,
-      apiKey: apiKey,
+      api_key: apiKey,
     });
 
+    newUser.save();
     console.log(newUser);
 
     res.status(201).json({
       status: 'success',
-      msg: `welcome on board dev ${username} below is your apiKey keep safe for future use...`,
-      apiKey,
+      msg: `welcome on board dev ${username} below is your apiKey, please keep it safe.`,
+      api_key: apiKey,
     });
   } catch (err) {
     next(err);
