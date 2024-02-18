@@ -1,0 +1,517 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Locale",
+    "version": "0.1.0",
+    "description": "Locale is a developer tool for anyone who needs to know Nigeria, geographically at least. Locale’s API shows you all of Nigeria’s regions, states, and local government areas(LGAs). Locale is looking to be a very useful tool for the thousands of businesses building for Nigeria’s 200M+ population size. ",
+    "termsOfService": "http://api_url/terms/",
+    "contact": {
+      "name": "Bakare Rilwan",
+      "email": "bakarerilwan1@gmail.com",
+      "url": "to be updated"
+    }
+  },
+  "paths": {
+    "/api/v1/nigeria/regions": {
+      "get": {
+        "tags": ["General Endpoints"],
+        "summary": "Get All Regions",
+        "operationId": "getRegions",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Region"
+                  },
+                  "title": "Response Get Regions Regions  Get"
+                }
+              }
+            }
+          },
+
+          "422": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/states": {
+      "get": {
+        "tags": ["General Endpoints"],
+        "summary": "Get All Regions",
+        "operationId": "getStates",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/State"
+                  },
+                  "title": "Response Get States States  Get"
+                }
+              }
+            }
+          },
+
+          "422": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/lgas": {
+      "get": {
+        "tags": ["General Endpoints"],
+        "summary": "Get All Lgas",
+        "operationId": "getLgas",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Lga"
+                  },
+                  "title": "Response Get Lgas Lgas  Get"
+                }
+              }
+            }
+          },
+
+          "422": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/{region}/{state}/lgas": {
+      "get": {
+        "tags": ["Specific Endpoints"],
+        "summary": "Get All Lga in a state",
+        "operationId": "getStateLgas",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "region",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "region"
+            }
+          },
+
+          {
+            "name": "state",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "state"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Lga"
+                  },
+                  "title": "Response Get State Lga  Get"
+                }
+              }
+            }
+          },
+
+          "422": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/{region}/lgas": {
+      "get": {
+        "tags": ["Specific Endpoints"],
+        "summary": "Get All Lga in a region",
+        "operationId": "getRegionLgas",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "region",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "region"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Lga"
+                  },
+                  "title": "Response Get Regions Regions  Get"
+                }
+              }
+            }
+          },
+
+          "422": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "Region": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "name"
+          },
+
+          "states": {
+            "type": "string",
+            "title": "states"
+          },
+
+          "description": {
+            "type": "string",
+            "title": "description"
+          },
+
+          "major_ethnic_group": {
+            "type": "string",
+            "title": "major_ethnic_group"
+          }
+        },
+        "type": "object",
+        "required": ["name", "states", "description", "major_ethnic_group"]
+      },
+
+      "State": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "capital"
+          },
+          "capital": {
+            "type": "string",
+            "title": "capital"
+          },
+          "slogan": {
+            "type": "string",
+            "title": "slogan"
+          },
+          "established": {
+            "type": "string",
+            "title": "established"
+          },
+          "area": {
+            "type": "string",
+            "title": "area"
+          },
+
+          "ethnic_groups": [
+            {
+              "type": "string",
+              "required": true,
+              "title": "ethnic_groups"
+            }
+          ],
+
+          "population": {
+            "type": "string",
+            "title": "population"
+          },
+
+          "region": {
+            "type": "string",
+            "title": "region"
+          },
+
+          "postal_code": {
+            "type": "string",
+            "title": "postal_code"
+          },
+
+          "website": {
+            "type": "string",
+            "title": "website"
+          },
+
+          "coordinate": {
+            "type": "string",
+            "title": "coordinate"
+          },
+
+          "description": {
+            "type": "string",
+            "title": "descriptions"
+          },
+
+          "lgas": {
+            "type": "arrray",
+            "title": "lgas"
+          },
+
+          "institutions": {
+            "type": "string",
+            "title": "institutuons"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "capital",
+          "slogan",
+          "established",
+          "area",
+          "ethnic_groups",
+          "population",
+          "region",
+          "postal_code",
+          "website",
+          "coordinate",
+          "description",
+          "lgas",
+          "institutions"
+        ],
+        "title": "Post"
+      },
+
+      "Lga": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "name"
+          },
+
+          "state": {
+            "type": "string",
+            "title": "state"
+          },
+
+          "region": {
+            "type": "string",
+            "title": "region"
+          }
+        },
+        "type": "object",
+        "required": ["name", "state", "region"]
+      },
+
+      "User": {
+        "properties": {
+          "username": {
+            "type": "string",
+            "title": "username"
+          },
+
+          "email": {
+            "type": "string",
+            "title": "email"
+          },
+
+          "password": {
+            "type": "string",
+            "title": "password"
+          }
+        },
+        "type": "object",
+        "required": ["username", "email", "password"]
+      },
+
+      "BadRequestError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      }
+    },
+
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "scopes": {},
+            "tokenUrl": "login"
+          }
+        }
+      }
+    }
+  }
+}

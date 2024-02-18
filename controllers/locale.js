@@ -9,7 +9,7 @@ const BadRequestError = require('../errors/bad-request');
 // general endpoints controllers
 const getAllRegions = async (req, res, next) => {
   try {
-    const data = await Region.find().populate('states');
+    const data = await Region.find().populate('states', 'name capital slogan');
 
     res.status(200).json({
       status: 'success',

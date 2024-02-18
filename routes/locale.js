@@ -23,9 +23,9 @@ router.get('/states', getAllStates);
 router.get('/lgas', getAllLgas);
 
 //specific endpoints
-router.get('/:region/lgas', checkApiKey, lgasInRegion);
-router.get('/:region/:state/lgas', checkApiKey, lgasInState);
-router.get('/:region/states', checkApiKey, statesInRegion);
+router.get('/:region/lgas', lgasInRegion);
+router.get('/:region/:state/lgas', lgasInState);
+router.get('/:region/states', statesInRegion);
 
 // admin endpoints
 
