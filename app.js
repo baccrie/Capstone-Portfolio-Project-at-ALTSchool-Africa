@@ -4,6 +4,8 @@ const { rateLimit } = require('express-rate-limit');
 const cors = require('cors');
 require('dotenv').config();
 const { connectDB } = require('./db/connect');
+const swaggerUi = require('swagger-ui-express');
+const openApiDocumentation = require('./docs.json');
 
 // third party modules
 const localeRouter = require('./routes/locale');
@@ -22,6 +24,7 @@ const limiter = rateLimit({
 });
 
 // middlewares
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
 app.use(express.json());
 app.use(cors());
 app.use(limiter);

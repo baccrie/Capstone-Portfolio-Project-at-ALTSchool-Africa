@@ -18,9 +18,9 @@ const {
 router.get('/search', checkApiKey, search);
 
 // general endpoints
-router.get('/regions', checkApiKey, getAllRegions);
-router.get('/states', checkApiKey, getAllStates);
-router.get('/lgas', checkApiKey, getAllLgas);
+router.get('/regions', getAllRegions);
+router.get('/states', getAllStates);
+router.get('/lgas', getAllLgas);
 
 //specific endpoints
 router.get('/:region/lgas', checkApiKey, lgasInRegion);
