@@ -9,7 +9,10 @@ const BadRequestError = require('../errors/bad-request');
 // general endpoints controllers
 const getAllRegions = async (req, res, next) => {
   try {
-    const data = await Region.find().populate('states', 'name capital slogan');
+    const data = await Region.find().populate(
+      'states',
+      '-_id name capital slogan'
+    );
 
     res.status(200).json({
       status: 'success',
@@ -26,8 +29,8 @@ const getAllStates = async (req, res, next) => {
   try {
     const totalNo = await State.find().count();
     let states = State.find()
-      .populate('region', 'name')
-      .populate('lgas', 'name');
+      .populate('region', '-_id name')
+      .populate('lgas', '-_id name');
 
     // check if client is willing to paginate
     if (limit || page) {
@@ -62,7 +65,9 @@ const getAllLgas = async (req, res, next) => {
 
   try {
     const totalNo = await Lga.find().count();
-    let lgas = Lga.find().populate('region', 'name').populate('state', 'name');
+    let lgas = Lga.find()
+      .populate('region', '-_id name')
+      .populate('state', '-_id name');
 
     // check if clients is willing to paginate
     if (limit || page) {

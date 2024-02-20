@@ -78,11 +78,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/RegionRes"
-                  },
-                  "title": "Response Get Regions Regions  Get"
+                  "$ref": "#/components/schemas/RegionRes"
                 }
               }
             }
@@ -141,7 +137,6 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 10,
               "title": "Limit"
             }
           },
@@ -151,7 +146,6 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 1,
               "title": "Page"
             }
           }
@@ -163,11 +157,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/StateRes"
-                  },
-                  "title": "Response Get States States  Get"
+                  "$ref": "#/components/schemas/StateRes"
                 }
               }
             }
@@ -226,7 +216,6 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 10,
               "title": "Limit"
             }
           },
@@ -236,7 +225,6 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 1,
               "title": "Page"
             }
           }
@@ -248,11 +236,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/LgaRes"
-                  },
-                  "title": "Response Get Lgas Lgas  Get"
+                  "$ref": "#/components/schemas/LgaRes"
                 }
               }
             }
@@ -332,11 +316,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/LgaRes"
-                  },
-                  "title": "Response Get Lgas Lgas  Get"
+                  "$ref": "#/components/schemas/LgaRes"
                 }
               }
             }
@@ -407,11 +387,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/LgaRes"
-                  },
-                  "title": "Response Get Regions Regions  Get"
+                  "$ref": "#/components/schemas/LgaRes"
                 }
               }
             }
@@ -482,11 +458,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/StateRes"
-                  },
-                  "title": "Response Get Regions State  Get"
+                  "$ref": "#/components/schemas/StateRes"
                 }
               }
             }
@@ -646,23 +618,6 @@
             "title": "area"
           },
 
-          "ethnic_groups": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "ethnic_groups"
-          },
-
-          "population": {
-            "type": "object",
-            "title": "population"
-          },
-
-          "region": {
-            "$ref": "#/components/schemas/Region"
-          },
-
           "postal_code": {
             "type": "string",
             "title": "postal_code"
@@ -678,9 +633,26 @@
             "title": "coordinate"
           },
 
+          "region": {
+            "$ref": "#/components/schemas/Region"
+          },
+
+          "population": {
+            "type": "object",
+            "title": "population"
+          },
+
           "description": {
             "type": "string",
             "title": "descriptions"
+          },
+
+          "ethnic_groups": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "ethnic_groups"
           },
 
           "lgas": {
@@ -727,11 +699,12 @@
           },
 
           "state": {
-            "$ref": "#/components/schemas/State"
+            "type": "object",
+            "title": "state"
           },
 
           "region": {
-            "type": "string",
+            "type": "object",
             "title": "region"
           }
         },

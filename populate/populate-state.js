@@ -25,15 +25,16 @@ const populateData = async () => {
       newState.slogan = state.slogan;
       newState.established = state.established;
       newState.area = state.area;
-      newState.ethnic_groups = state.ethnic_groups;
-      newState.population = state.population;
-      newState.institutions = state.institutions;
-      newState.region = stateRegion[0]._id;
       newState.postal_code = state.postal_code;
       newState.website = state.website;
-      newState.description = state.description;
       newState.coordinate = state.coordinate;
+      newState.region = stateRegion[0]._id;
+      newState.population = state.population;
+      newState.description = state.description;
+      newState.ethnic_groups = state.ethnic_groups;
       newState.lgas;
+      newState.institutions = state.institutions;
+
       [];
 
       for (const lga of state.lgas) {

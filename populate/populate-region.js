@@ -11,7 +11,7 @@ console.log(typeof data);
 console.log();
 const populateRegion = async () => {
   try {
-    await connectDB('process.env.MONGODB_URI');
+    await connectDB(process.env.MONGODB_URI);
     await Region.deleteMany();
     const res = await Region.create(allRegions);
     console.log(res);

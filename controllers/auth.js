@@ -48,7 +48,6 @@ const signUp = async (req, res, next) => {
       api_key: apiKey,
     });
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };

@@ -10,6 +10,7 @@ const openApiDocumentation = require('./docs.json');
 // third party modules
 const localeRouter = require('./routes/locale');
 const authRouter = require('./routes/auth');
+const adminRouter = require('./routes/admin');
 const { errorHandler } = require('./middleware/error-handler');
 const { notFound } = require('./middleware/not-found');
 
@@ -32,6 +33,7 @@ app.use(limiter);
 // api middlewares router
 app.use('/api/v1/nigeria', localeRouter);
 app.use('/api/v1/nigeria', authRouter);
+app.use('/api/v1/nigeria', adminRouter);
 
 app.get('/', (req, res) => {
   res.status(200).json({
