@@ -14,6 +14,14 @@ const createRegion = async (req, res, next) => {
     let { name, description, major_ethnic_group } = req.body;
 
     name = capitalize(name);
+
+    // check if region exists
+    const check = await Region.findOne({ name });
+    if (check) {
+      throw new BadRequestError('Region with name already exists...');
+    }
+
+    // else continue
     const newRegionObj = { name, description, major_ethnic_group };
     const newRegion = await Region.create(newRegionObj);
 
@@ -22,7 +30,8 @@ const createRegion = async (req, res, next) => {
       data: newRegion,
     });
   } catch (err) {
-    next(new Error('create region failed!'));
+    //console.log(err);
+    next(err);
   }
 };
 
@@ -34,8 +43,21 @@ const updateRegion = async (req, res, next) => {
 
     name = capitalize(name);
     region = capitalize(region);
-
+    console.log(req.params);
     const newRegionObj = { name, description, major_ethnic_group };
+
+    // check if region exists
+    const check = await Region.findOne({
+      name: region,
+    });
+    console.log(check);
+    if (!check) {
+      throw new BadRequestError(
+        'The region you re trying to update dosent exist!'
+      );
+    }
+
+    // Update Region
     const updatedRegion = await Region.findOneAndUpdate(
       { name: region },
       newRegionObj,
@@ -44,12 +66,6 @@ const updateRegion = async (req, res, next) => {
         new: true,
       }
     );
-
-    if (!updatedRegion) {
-      throw new BadRequestError(
-        'The region you re trying to update dosent exist!'
-      );
-    }
 
     res.status(200).json({
       status: 'success',
@@ -103,7 +119,7 @@ const deleteRegion = async (req, res, next) => {
 // State
 const createState = async (req, res, next) => {
   try {
-    let { state, region } = req.params;
+    let { region } = req.params;
     region = capitalize(region);
 
     const regionToAddState = await Region.findOne({ name: region });
@@ -113,6 +129,15 @@ const createState = async (req, res, next) => {
       );
     }
 
+    // check if state exists
+    const check = await State.findOne({
+      name: capitalize(req.body.name),
+    });
+
+    console.log(check, capitalize(req.body.name));
+    if (check) {
+      throw new BadRequestError('State with name already exists');
+    }
     const {
       name,
       capital,
@@ -130,7 +155,7 @@ const createState = async (req, res, next) => {
     } = req.body;
 
     const queryObj = {
-      name,
+      name: capitalize(name),
       capital,
       slogan,
       established,
@@ -155,19 +180,35 @@ const createState = async (req, res, next) => {
       data: newState,
     });
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };
 
 const updateState = async (req, res, next) => {
   try {
+    console.log('yes');
     //let { name, } = req.body;
     let { region, state } = req.params;
 
     state = capitalize(state);
     region = capitalize(region);
+    req.body.name = capitalize(req.body.name);
 
+    const queryObj = {
+      name: req.body.name,
+      capital: req.body.capital,
+      slogan: req.body.slogan,
+      established: req.body.established,
+      area: req.body.area,
+      ethnic_groups: req.body.ethnic_groups,
+      postal_code: req.body.postal_code,
+      website: req.body.website,
+      coordinate: req.body.coordinate,
+      population: req.body.population,
+      description: req.body.description,
+      institutions: req.body.institutions,
+    };
+    console.log(state);
     // check region validity
     const regionToUpdateState = await Region.findOne({
       name: region,
@@ -185,12 +226,18 @@ const updateState = async (req, res, next) => {
       region: regionToUpdateState._id,
     });
 
+    console.log(queryObj.name === stateToUpdate.name);
+
     if (!stateToUpdate) {
       throw new BadRequestError('State dosent exist in region!!!');
+    } else if (stateToUpdate && queryObj.name !== stateToUpdate.name) {
+      throw new BadRequestError(
+        'the name provided in the request body belongs to another state, pls choose another name'
+      );
     }
 
     //Update Lga and save
-    const data = await State.findByIdAndUpdate(stateToUpdate._id, req.body, {
+    const data = await State.findByIdAndUpdate(stateToUpdate._id, queryObj, {
       runValidators: true,
       new: true,
     });
@@ -260,7 +307,7 @@ const deleteState = async (req, res, next) => {
   }
 };
 
-//Lgas
+// Lgas
 
 // create lga
 const createLga = async (req, res, next) => {
@@ -274,9 +321,29 @@ const createLga = async (req, res, next) => {
     const stateToAddLga = await State.findOne({
       name: state,
     });
+
+    if (!stateToAddLga) {
+      throw new BadRequestError(
+        'the state you re trying to create a lga for dosent exists..'
+      );
+    }
+
     const regionToAddLga = await Region.findOne({
       name: region,
     });
+
+    if (!regionToAddLga) {
+      throw new BadRequestError('Oops region is invalid!!');
+    }
+
+    // check if lga exists under state and region
+    const check = await Lga.findOne({
+      region: regionToAddLga._id,
+      state: stateToAddLga._id,
+    });
+    if (check) {
+      throw new BadRequestError('Lga already exists in state and region!!!');
+    }
 
     const lga = await Lga.create({
       name,

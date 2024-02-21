@@ -16,16 +16,16 @@ const router = express.Router();
 // Region
 router.post('/region', createRegion);
 router.patch('/:region', updateRegion);
-router.delete('/region/:region', deleteRegion);
+router.delete('/delete/region/:region/', deleteRegion);
 
 // State
 router.post('/:region/state', createState);
 router.patch('/:region/:state', updateState);
-router.delete('/:region/:state', deleteState);
+router.delete('/delete/:region/:state', deleteState);
 
 //Lga
 router.post('/:state/lga', createLga);
 router.patch('/:state/:lga', updateLga);
-router.delete('/:state/:lga', deleteLga);
+router.delete('/delet/:state/:lga', deleteLga);
 
 module.exports = router;
