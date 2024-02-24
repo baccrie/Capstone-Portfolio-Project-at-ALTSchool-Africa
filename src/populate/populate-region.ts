@@ -3,7 +3,7 @@ import Region from '../models/region';
 import allRegions from '../seed/region.json';
 require('dotenv').config();
 
-const populateRegion = async () => {
+export async function populateRegion() {
   try {
     await connectDB(process.env.MONGODB_URI);
     await Region.deleteMany();
@@ -13,6 +13,6 @@ const populateRegion = async () => {
   } catch (err) {
     process.exit(1);
   }
-};
+}
 
-populateRegion();
+//populateRegion();

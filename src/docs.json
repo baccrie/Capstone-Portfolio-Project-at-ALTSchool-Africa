@@ -237,7 +237,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StateRes"
+                  "$ref": "#/components/schemas/SearchResponse"
                 }
               }
             }
@@ -1655,6 +1655,27 @@
         "type": "object",
         "required": ["username", "email", "Password"],
         "title": "SignUpResponse"
+      },
+
+      "SearchResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status",
+            "description": "success"
+          },
+          "msg": {
+            "type": "string",
+            "title": "msg"
+          },
+          "data": {
+            "type": "object",
+            "title": "data"
+          }
+        },
+        "type": "object",
+        "required": ["status", "msg", "data"],
+        "title": "SearchResponse"
       },
 
       "CreateRegion": {

@@ -134,8 +134,14 @@ function search(req, res, next) {
             if (!data || data === null) {
                 throw new bad_request_1.default('Invalid search key, search by state, lga or region name pls..', 400);
             }
+            const resType = data instanceof state_1.default
+                ? 'state'
+                : data instanceof region_1.default
+                    ? 'Region'
+                    : 'Lga';
             res.status(200).json({
                 status: 'success',
+                msg: `Found result in ${resType}`,
                 data,
             });
         }

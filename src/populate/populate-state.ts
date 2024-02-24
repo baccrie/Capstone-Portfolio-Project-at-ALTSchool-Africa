@@ -6,7 +6,7 @@ import Lga from '../models/lga';
 import allState from '../seed/states.json';
 require('dotenv').config();
 
-const populateData = async () => {
+export async function populateStateAndLga() {
   try {
     console.log();
     await connectDB(process.env.MONGODB_URI);
@@ -35,8 +35,6 @@ const populateData = async () => {
       newState.lgas;
       newState.institutions = state.institutions;
 
-      [];
-
       for (const lga of state.lgas) {
         const newLga = new Lga();
         newLga.name = lga;
@@ -57,6 +55,6 @@ const populateData = async () => {
   } catch (error) {
     process.exit(1);
   }
-};
+}
 
-populateData().then((res) => {});
+//populateData().then((res) => {});

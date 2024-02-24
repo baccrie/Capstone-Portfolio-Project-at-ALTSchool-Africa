@@ -152,8 +152,16 @@ export async function search(req: Request, res: Response, next: NextFunction) {
       );
     }
 
+    const resType =
+      data instanceof State
+        ? 'state'
+        : data instanceof Region
+        ? 'Region'
+        : 'Lga';
+
     res.status(200).json({
       status: 'success',
+      msg: `Found result in ${resType}`,
       data,
     });
   } catch (error) {
