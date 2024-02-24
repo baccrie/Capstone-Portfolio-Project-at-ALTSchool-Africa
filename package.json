@@ -2,10 +2,11 @@
   "name": "capstone-portfolio-project-at-altschool-africa",
   "version": "1.0.0",
   "description": "Altschool Africa Capstone Project (locale api)",
-  "main": "app.js",
+  "main": "./src/app.js",
   "scripts": {
-    "test": "npm test",
-    "start": "nodemon app.js"
+    "populateDB": "&& node ./dist/populate/populate-region && node ./dist/populate/populate-state",
+    "build": "rm -rf ./dist && npx tsc",
+    "start": "npm run build && cp ./src/docs.json ./dist && nodemon dist/app.js"
   },
   "keywords": [
     "altschool",
@@ -17,6 +18,7 @@
   "author": "Bakare Rilwan",
   "license": "ISC",
   "dependencies": {
+    "@types/express": "^4.17.21",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
@@ -27,9 +29,13 @@
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.1",
     "redis": "^4.6.13",
-    "swagger-ui-express": "^5.0.0"
+    "swagger-ui-express": "^5.0.0",
+    "typescript": "^5.3.3"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/swagger-ui-express": "^4.1.6",
     "nodemon": "^3.0.3"
   }
 }

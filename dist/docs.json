@@ -1,0 +1,1841 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Locale",
+    "version": "0.1.0",
+    "description": "Locale is a developer tool for anyone who needs to know Nigeria, geographically at least. Locale’s API shows you all of Nigeria’s regions, states, and local government areas(LGAs). Locale is looking to be a very useful tool for the thousands of businesses building for Nigeria’s 200M+ population size. ",
+    "github-repo": "https://www.github.com/baccrie/Capstone-Portfolio-Project-at-ALTSchool-Africa",
+    "contact": {
+      "name": "Bakare Rilwan",
+      "email": "bakarerilwan1@gmail.com"
+    }
+  },
+
+  "paths": {
+    "/api/v1/nigeria/auth/signup": {
+      "url": "/",
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Register new user and generate api-key",
+        "operationId": "signUp",
+
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSignUp"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SignUpResponse"
+                  },
+                  "title": "Response Get Regions Regions  Get"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/regions": {
+      "get": {
+        "tags": ["General"],
+        "summary": "Get All Regions",
+        "operationId": "getRegions",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegionRes"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/states": {
+      "get": {
+        "tags": ["General"],
+        "summary": "Get All States",
+        "operationId": "getStates",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "Page"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StateRes"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/search": {
+      "get": {
+        "tags": ["Search"],
+        "summary": "Search for lgas , state  or Region",
+        "operationId": "search",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Search"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StateRes"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/lgas": {
+      "get": {
+        "tags": ["General"],
+        "summary": "Get All Lgas",
+        "operationId": "getLgas",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "Page"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LgaRes"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/{region}/{state}/lgas": {
+      "get": {
+        "tags": ["Specific"],
+        "summary": "Get All Lga in a state",
+        "operationId": "getStateLgas",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "region",
+            "in": "path",
+            "required": true,
+            "description": "Enter region name",
+            "schema": {
+              "type": "string",
+              "title": "region"
+            }
+          },
+
+          {
+            "name": "state",
+            "in": "path",
+            "required": true,
+            "description": "Enter state name",
+            "schema": {
+              "type": "string",
+              "title": "state"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LgaRes"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/{region}/lgas": {
+      "get": {
+        "tags": ["Specific"],
+        "summary": "Get All Lga in a region",
+        "operationId": "getRegionLgas",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "region",
+            "in": "path",
+            "description": "Enter region name",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "region"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LgaRes"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/{region}/states": {
+      "get": {
+        "tags": ["Specific"],
+        "summary": "Get All States in a region",
+        "operationId": "getRegionStates",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "region",
+            "in": "path",
+            "required": true,
+            "description": "Enter region name",
+            "schema": {
+              "type": "string",
+              "title": "region"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StateRes"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/region": {
+      "post": {
+        "tags": ["Admin-Create"],
+        "summary": "create a region",
+        "operationId": "postRegion",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRegion"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateRegionRes"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/{region}/state": {
+      "post": {
+        "tags": ["Admin-Create"],
+        "summary": "create a state under region",
+        "operationId": "postState",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "region",
+            "in": "path",
+            "description": "Enter region name",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "region"
+            }
+          }
+        ],
+
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateState"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateStateRes"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/{state}/lga": {
+      "post": {
+        "tags": ["Admin-Create"],
+        "summary": "create a lga under state",
+        "operationId": "postLga",
+
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "state",
+            "in": "path",
+            "required": true,
+            "description": "Enter state name",
+            "schema": {
+              "type": "string",
+              "title": "state"
+            }
+          }
+        ],
+
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLga"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateLgaRes"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/update/region/{region}": {
+      "patch": {
+        "tags": ["Admin-Update"],
+        "summary": "Update a Region",
+        "operationId": "patchRegion",
+
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "region",
+            "in": "path",
+            "description": "Enter name of region",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "region"
+            }
+          }
+        ],
+
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRegion"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateRegionRes"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/update/state/{region}/{state}": {
+      "patch": {
+        "tags": ["Admin-Update"],
+        "summary": "update state info in a region",
+        "operationId": "patchState",
+
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "region",
+            "in": "path",
+            "description": "Enter name of region",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "region"
+            }
+          },
+
+          {
+            "name": "state",
+            "in": "path",
+            "description": "Enter name of state",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "state"
+            }
+          }
+        ],
+
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateState"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateStateRes"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/update/lga/{state}/{lga}": {
+      "patch": {
+        "tags": ["Admin-Update"],
+        "summary": "update lga in state",
+        "operationId": "patchLga",
+
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "state",
+            "in": "path",
+            "description": "Enter name of state",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "state"
+            }
+          },
+
+          {
+            "name": "lga",
+            "in": "path",
+            "description": "Enter name of lga",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "lga"
+            }
+          }
+        ],
+
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLga"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateLgaRes"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/delete/region/{region}": {
+      "delete": {
+        "tags": ["Admin-Delete"],
+        "summary": "delete region",
+        "operationId": "deleteRegion",
+
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "region",
+            "in": "path",
+            "description": "Enter name of region",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "region"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteRes"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/delete/state/{region}/{state}": {
+      "delete": {
+        "tags": ["Admin-Delete"],
+        "summary": "delete state",
+        "operationId": "deleteState",
+
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "region",
+            "in": "path",
+            "required": true,
+            "description": "Enter name of region",
+            "schema": {
+              "type": "string",
+              "title": "region"
+            }
+          },
+
+          {
+            "name": "state",
+            "in": "path",
+            "required": true,
+            "description": "Enter name of state",
+            "schema": {
+              "type": "string",
+              "title": "state"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteRes"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/delete/lga/{state}/{lga}": {
+      "delete": {
+        "tags": ["Admin-Delete"],
+        "summary": "delete lga",
+        "operationId": "deleteLga",
+
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "state",
+            "in": "path",
+            "required": true,
+            "description": "Enter name of state",
+            "schema": {
+              "type": "string",
+              "title": "state"
+            }
+          },
+
+          {
+            "name": "lga",
+            "in": "path",
+            "required": true,
+            "description": "Enter name of lga",
+            "schema": {
+              "type": "string",
+              "title": "lga"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteRes"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "RegionRes": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "nos": {
+            "type": "integer",
+            "title": "nos"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Region"
+            },
+            "type": "array",
+            "title": "data"
+          }
+        }
+      },
+
+      "StateRes": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "nos": {
+            "type": "integer",
+            "title": "nos"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/State"
+            },
+            "type": "array",
+            "title": "data"
+          }
+        }
+      },
+
+      "LgaRes": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "nos": {
+            "type": "integer",
+            "title": "nos"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Lga"
+            },
+            "type": "array",
+            "title": "data"
+          }
+        }
+      },
+
+      "CreateRegionRes": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Region"
+            },
+            "type": "object",
+            "title": "data"
+          }
+        }
+      },
+
+      "CreateStateRes": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/State"
+            },
+            "type": "object",
+            "title": "data"
+          }
+        }
+      },
+
+      "CreateLgaRes": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Lga"
+            },
+            "type": "object",
+            "title": "data"
+          }
+        }
+      },
+
+      "Region": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "name"
+          },
+
+          "states": {
+            "items": {
+              "$ref": "#/components/schemas/State"
+            },
+            "type": "array",
+            "title": "states"
+          },
+
+          "description": {
+            "type": "string",
+            "title": "description"
+          },
+
+          "major_ethnic_group": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "major_ethnic_group"
+          }
+        },
+        "type": "object",
+        "required": ["name", "states", "description", "major_ethnic_group"]
+      },
+
+      "State": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "capital"
+          },
+          "capital": {
+            "type": "string",
+            "title": "capital"
+          },
+          "slogan": {
+            "type": "string",
+            "title": "slogan"
+          },
+          "established": {
+            "type": "string",
+            "title": "established"
+          },
+          "area": {
+            "type": "string",
+            "title": "area"
+          },
+
+          "postal_code": {
+            "type": "string",
+            "title": "postal_code"
+          },
+
+          "website": {
+            "type": "string",
+            "title": "website"
+          },
+
+          "coordinate": {
+            "type": "string",
+            "title": "coordinate"
+          },
+
+          "region": {
+            "$ref": "#/components/schemas/Region"
+          },
+
+          "population": {
+            "type": "object",
+            "title": "population"
+          },
+
+          "description": {
+            "type": "string",
+            "title": "descriptions"
+          },
+
+          "ethnic_groups": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "ethnic_groups"
+          },
+
+          "lgas": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "lgas"
+          },
+
+          "institutions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "institutions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "capital",
+          "slogan",
+          "established",
+          "area",
+          "ethnic_groups",
+          "population",
+          "region",
+          "postal_code",
+          "website",
+          "coordinate",
+          "description",
+          "lgas",
+          "institutions"
+        ],
+        "title": "Post"
+      },
+
+      "Lga": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "name"
+          },
+
+          "state": {
+            "type": "object",
+            "title": "state"
+          },
+
+          "region": {
+            "type": "object",
+            "title": "region"
+          }
+        },
+        "type": "object",
+        "required": ["name", "state", "region"]
+      },
+
+      "User": {
+        "properties": {
+          "username": {
+            "type": "string",
+            "title": "username"
+          },
+
+          "email": {
+            "type": "string",
+            "title": "email"
+          },
+
+          "password": {
+            "type": "string",
+            "title": "password"
+          }
+        },
+        "type": "object",
+        "required": ["username", "email", "password"]
+      },
+
+      "UserSignUp": {
+        "properties": {
+          "username": {
+            "type": "string",
+            "title": "username"
+          },
+          "email": {
+            "type": "string",
+            "title": "email"
+          },
+          "password": {
+            "type": "string",
+            "title": "password"
+          }
+        },
+        "type": "object",
+        "required": ["username", "email", "Password"],
+        "title": "UserSignup"
+      },
+
+      "SignUpResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "msg": {
+            "type": "string",
+            "title": "msg"
+          },
+          "api_key": {
+            "type": "string",
+            "title": "api_key"
+          }
+        },
+        "type": "object",
+        "required": ["username", "email", "Password"],
+        "title": "SignUpResponse"
+      },
+
+      "CreateRegion": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "username"
+          },
+          "description": {
+            "type": "string",
+            "title": "email"
+          },
+          "major_ethnic_group": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "major_ethnic_group"
+          }
+        },
+        "type": "object",
+        "required": ["name", "description"],
+        "title": "CreateRegion"
+      },
+
+      "CreateState": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "username"
+          },
+
+          "capital": {
+            "type": "string",
+            "title": "capital"
+          },
+
+          "slogan": {
+            "type": "string",
+            "title": "slogan"
+          },
+
+          "established": {
+            "type": "string",
+            "title": "established"
+          },
+
+          "area": {
+            "type": "string",
+            "title": "area"
+          },
+
+          "postal_code": {
+            "type": "string",
+            "title": "postal_code"
+          },
+
+          "website": {
+            "type": "string",
+            "title": "website"
+          },
+          "coordinate": {
+            "type": "string",
+            "title": "coordinate"
+          },
+
+          "population": {
+            "type": "object",
+            "title": "population"
+          },
+
+          "description": {
+            "type": "string",
+            "title": "descriptions"
+          },
+
+          "ethnic_groups": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "ethnic_groups"
+          },
+
+          "institutions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "institutions"
+          }
+        },
+        "type": "object",
+        "required": ["name", "description"],
+        "title": "CreateRegion"
+      },
+
+      "CreateLga": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "username"
+          },
+
+          "region": {
+            "type": "string",
+            "title": "region"
+          }
+        },
+        "type": "object",
+        "required": ["name", "region"],
+        "title": "CreateLga"
+      },
+
+      "DeleteRes": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "msg": {
+            "type": "string",
+            "title": "status"
+          }
+        },
+        "type": "object",
+        "title": "DeleteRes"
+      },
+
+      "BadRequestError": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "msg": {
+            "type": "string",
+            "title": "status"
+          }
+        },
+        "type": "object",
+        "title": "BadRequestError"
+      },
+
+      "AuthenticationError": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "msg": {
+            "type": "string",
+            "title": "status"
+          }
+        },
+        "type": "object",
+        "title": "AuthenticationError"
+      },
+
+      "ServerError": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "msg": {
+            "type": "string",
+            "title": "status"
+          }
+        },
+        "type": "object",
+        "title": "ServerError"
+      }
+    },
+
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "apikey"
+      }
+    }
+  }
+}
