@@ -17,6 +17,7 @@ const admin_1 = __importDefault(require("./routes/admin"));
 const error_handler_1 = require("./middleware/error-handler");
 const not_found_1 = require("./middleware/not-found");
 let openApiDocumentation = require('./docs.json');
+const check_api_key_1 = __importDefault(require("./middleware/check-api-key"));
 // initializing express server
 const app = (0, express_1.default)();
 const PORT = process.env.PORT;
@@ -34,8 +35,8 @@ app.use((0, cors_1.default)());
 app.use(limiter);
 // endpoints
 app.use('/api/v1/nigeria', auth_1.default);
-app.use('/api/v1/nigeria', locale_1.default);
-app.use('/api/v1/nigeria', admin_1.default);
+app.use('/api/v1/nigeria', check_api_key_1.default, locale_1.default);
+app.use('/api/v1/nigeria', check_api_key_1.default, admin_1.default);
 // test api
 app.get('/', (req, res) => {
     res.status(200).json({
