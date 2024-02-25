@@ -7,7 +7,4 @@ class customApiError extends Error {
     }
 }
 exports.default = customApiError;
-// const createCustomError = (message, STAUS) => {
-//   return new customApiError(message, STAUS);
-// };
 //# sourceMappingURL=custom-error.js.map

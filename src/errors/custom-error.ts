@@ -12,7 +12,3 @@ export default class customApiError extends Error {
     this.statusCode = statusCode;
   }
 }
-
-// const createCustomError = (message, STAUS) => {
-//   return new customApiError(message, STAUS);
-// };

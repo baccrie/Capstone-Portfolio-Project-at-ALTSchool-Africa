@@ -40,7 +40,7 @@ app.use(limiter);
 
 // endpoints
 app.use('/api/v1/nigeria', authRouter);
-app.use('/api/v1/nigeria', localeRouter);
+app.use('/api/v1/nigeria', checkApiKey, localeRouter);
 app.use('/api/v1/nigeria', checkApiKey, adminRouter);
 
 // test api
@@ -58,11 +58,6 @@ app.use(notFound);
 connectDB(process.env.MONGODB_URI)
   .then((res) => {
     console.log(`Connection to db successful...`);
-  })
-  .then(() => {
-    if (process.env.NODE_ENV === 'production') {
-      console.log('Database successfully loaded and populated..');
-    }
   })
   .then(() => {
     app.listen(PORT, () => {

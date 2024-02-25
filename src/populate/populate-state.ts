@@ -57,6 +57,4 @@ export async function populateStateAndLga() {
   }
 }
 
-populateStateAndLga().then(() => {
-  process.exit();
-});
+populateStateAndLga();

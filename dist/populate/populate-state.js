@@ -68,7 +68,5 @@ function populateStateAndLga() {
     });
 }
 exports.populateStateAndLga = populateStateAndLga;
-populateStateAndLga().then(() => {
-    process.exit();
-});
+populateStateAndLga();
 //# sourceMappingURL=populate-state.js.map

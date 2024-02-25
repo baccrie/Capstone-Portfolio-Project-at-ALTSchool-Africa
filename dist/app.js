@@ -35,7 +35,7 @@ app.use((0, cors_1.default)());
 app.use(limiter);
 // endpoints
 app.use('/api/v1/nigeria', auth_1.default);
-app.use('/api/v1/nigeria', locale_1.default);
+app.use('/api/v1/nigeria', check_api_key_1.default, locale_1.default);
 app.use('/api/v1/nigeria', check_api_key_1.default, admin_1.default);
 // test api
 app.get('/', (req, res) => {
@@ -50,11 +50,6 @@ app.use(not_found_1.notFound);
 (0, connect_1.connectDB)(process.env.MONGODB_URI)
     .then((res) => {
     console.log(`Connection to db successful...`);
-})
-    .then(() => {
-    if (process.env.NODE_ENV === 'production') {
-        console.log('Database successfully loaded and populated..');
-    }
 })
     .then(() => {
     app.listen(PORT, () => {

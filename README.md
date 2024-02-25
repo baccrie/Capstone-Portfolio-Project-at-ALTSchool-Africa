@@ -22,8 +22,8 @@ This API uses a database of location data and a caching mechanism for better per
 
 ## Useful Links
 
-- [Swagger API Docs](https://locale-api.onrender.com/api)
-- [Hosted Link](https://locale-api.onrender.com/)
+- [Swagger API Docs](https://)
+- [Hosted Link](https://)
 
 ## Installation and Usage
 
@@ -47,7 +47,13 @@ This API uses a database of location data and a caching mechanism for better per
   $ npm install
 ```
 
-4. start app
+4. populate database with data
+
+```bash
+  $ npm run populateDB
+```
+
+5. build up with ts compiler and start app
 
 ```bash
    $ npm start
@@ -82,9 +88,40 @@ This API uses a database of location data and a caching mechanism for better per
    $ http://localhost:8000/api/v1/nigeria/lgas
    ```
 
-### General Endpoints
+### 1. Auth Endpoint
+
+- all other endpoints are protected and therefore requires an apikey header for authorization, this auth key can be generated once, after signup with the auth signup endpoint below.
+
+  #### i. signup user and generate apikey for subsequent request access to other protected endpoints.
+
+  ```c
+  $ http://localhost:8000/api/v1/nigeria/auth/signup
+  ```
+
+  - request payload
+
+  ```json
+  {
+    "username": "string",
+    "email": "string",
+    "password": "string"
+  }
+  ```
+
+  - response data
+
+  ```json
+  {
+    "status": "string",
+    "msg": "string",
+    "api_key": "string"
+  }
+  ```
+
+### 2. General Endpoints
 
 - notes - two out of the three general endpoints accepts two optional query params which is provided depending on if the end user is willing to paginate result or not
+
   - Limit - limits the no of result
   - Page - display result on a particular page depending on the limit
 
@@ -185,7 +222,7 @@ $ http://localhost:8000/api/v1/nigeria/lgas
   }
   ```
 
-### Search
+### 3. Search
 
 - note - accept one required query paramater,
 
@@ -205,7 +242,7 @@ $ http://localhost:8000/api/v1/nigeria/lgas
   }
   ```
 
-### Specific Endpoints
+### 4. Specific Endpoints
 
 - notes - accepts one or two mandatory path params
 
@@ -213,10 +250,31 @@ $ http://localhost:8000/api/v1/nigeria/lgas
   - state - name of state
   - lga - name of lga
 
-#### ii. get all lgas in a state
+#### i. get all lgas in a state
 
 ```c
 $ http://localhost:8000/api/v1/nigeria/{region}/{state}/lgas
+```
+
+- response
+  ```json
+  {
+    "status": "string",
+    "nos": 0,
+    "data": [
+      {
+        "name": "string",
+        "state": {},
+        "region": {}
+      }
+    ]
+  }
+  ```
+
+#### ii. get all lgas in a region
+
+```c
+$ http://localhost:8000/api/v1/nigeria/{region}/states
 ```
 
 - response
@@ -274,6 +332,8 @@ $ http://localhost:8000/api/v1/nigeria/{region}/lgas
 ## Code Snippets
 
 ```js
+app.ts;
+
 // node modules
 import express from 'express';
 import rateLimit from 'express-rate-limit';
@@ -345,6 +405,25 @@ connectDB(process.env.MONGODB_URI)
       console.log(`Server is listening to port ${PORT}....`);
     });
   });
+```
+
+```js
+custome - error.js;
+
+export interface CustomError extends Error {
+  message: string;
+  statusCode: number;
+}
+
+export default class customApiError extends Error {
+  statusCode: number;
+  message: any;
+
+  constructor(message: string, statusCode: number) {
+    super(message);
+    this.statusCode = statusCode;
+  }
+}
 ```
 
 ## Documentation
