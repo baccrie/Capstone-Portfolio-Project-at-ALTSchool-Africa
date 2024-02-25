@@ -59,10 +59,9 @@ This API uses a database of location data and a caching mechanism for better per
 
 1. The state schema contains a population property which is an Object and returns 3 key value pairs.
 
-
-    - Total - total population of the state in question according to the 2006 population census data
-    - Estimate - estimated population of the state in question based on 2022 projection
-    - Density - density of the state with respect to the 2006 population census statistics
+   - Total - total population of the state in question according to the 2006 population census data
+   - Estimate - estimated population of the state in question based on 2022 projection
+   - Density - density of the state with respect to the 2006 population census statistics
 
 - #### example
 
@@ -77,12 +76,11 @@ This API uses a database of location data and a caching mechanism for better per
 
 2. Data Caching - Owing to the fact that most of the routes requires a path parameter ,and response data might change on each request depending on this paramter, provided by the enduser. Caching was only adopted for the 3 general endpoints which are shown below.
 
-
-    ```c
-    $ http://localhost:8000/api/v1/nigeria/regions
-    $ http://localhost:8000/api/v1/nigeria/states
-    $ http://localhost:8000/api/v1/nigeria/lgas
-    ```
+   ```c
+   $ http://localhost:8000/api/v1/nigeria/regions
+   $ http://localhost:8000/api/v1/nigeria/states
+   $ http://localhost:8000/api/v1/nigeria/lgas
+   ```
 
 ### General Endpoints
 
@@ -349,8 +347,12 @@ connectDB(process.env.MONGODB_URI)
   });
 ```
 
-## DOcumentation
+## Documentation
 
 - #### links -
+
+    <p align="center">
+      <img src="https://www.github.com/baccrie/Capstone-Portfolio-Project-at-ALTSchool-Africa/blob/main/img/Screenshot%20from%202024-02-25%2008-22-12.png" width="686" height="289">
+    </p>
 
 - #### images
