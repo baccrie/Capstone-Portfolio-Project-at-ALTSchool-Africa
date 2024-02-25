@@ -53,7 +53,7 @@ This API uses a database of location data and a caching mechanism for better per
    $ npm start
 ```
 
-### Endpoints
+## Endpoints
 
 ### Notes on Usage
 
@@ -81,7 +81,7 @@ This API uses a database of location data and a caching mechanism for better per
    $ http://localhost:8000/api/v1/nigeria/lgas
    ```
 
-## General Endpoints
+### General Endpoints
 
 - notes - two out of the three general endpoints accepts two optional query params which is provided depending on if the end user is willing to paginate result or not
   - Limit - limits the no of result
@@ -204,7 +204,7 @@ $ http://localhost:8000/api/v1/nigeria/lgas
   }
   ```
 
-  ## Specific Endpoints
+  ### Specific Endpoints
 
   - notes - accepts one or two mandatory path params
 
