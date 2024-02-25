@@ -58,9 +58,11 @@ This API uses a database of location data and a caching mechanism for better per
 ### Notes on Usage
 
 1. The state schema contains a population property which is an Object and returns 3 key value pairs.
-   - Total - total population of the state in question according to the 2006 population census data
-   - Estimate - estimated population of the state in question based on 2022 projection
-   - Density - density of the state with respect to the 2006 population census statistics
+
+
+    - Total - total population of the state in question according to the 2006 population census data
+    - Estimate - estimated population of the state in question based on 2022 projection
+    - Density - density of the state with respect to the 2006 population census statistics
 
 - #### example
 
@@ -75,11 +77,12 @@ This API uses a database of location data and a caching mechanism for better per
 
 2. Data Caching - Owing to the fact that most of the routes requires a path parameter ,and response data might change on each request depending on this paramter, provided by the enduser. Caching was only adopted for the 3 general endpoints which are shown below.
 
-   ```c
-   $ http://localhost:8000/api/v1/nigeria/regions
-   $ http://localhost:8000/api/v1/nigeria/states
-   $ http://localhost:8000/api/v1/nigeria/lgas
-   ```
+
+    ```c
+    $ http://localhost:8000/api/v1/nigeria/regions
+    $ http://localhost:8000/api/v1/nigeria/states
+    $ http://localhost:8000/api/v1/nigeria/lgas
+    ```
 
 ### General Endpoints
 
@@ -204,71 +207,71 @@ $ http://localhost:8000/api/v1/nigeria/lgas
   }
   ```
 
-  ### Specific Endpoints
+### Specific Endpoints
 
-  - notes - accepts one or two mandatory path params
+- notes - accepts one or two mandatory path params
 
-    - region - name of region
-    - state - name of state
-    - lga - name of lga
+  - region - name of region
+  - state - name of state
+  - lga - name of lga
 
-  #### ii. get all lgas in a state
+#### ii. get all lgas in a state
 
-  ```c
-  $ http://localhost:8000/api/v1/nigeria/{region}/{state}/lgas
+```c
+$ http://localhost:8000/api/v1/nigeria/{region}/{state}/lgas
+```
+
+- response
+  ```json
+  {
+    "status": "string",
+    "nos": 0,
+    "data": [
+      {
+        "name": "string",
+        "state": {},
+        "region": {}
+      }
+    ]
+  }
   ```
 
-  - response
-    ```json
-    {
-      "status": "string",
-      "nos": 0,
-      "data": [
-        {
+#### iii. get all states in a region
+
+```c
+$ http://localhost:8000/api/v1/nigeria/{region}/lgas
+```
+
+- response
+  ```json
+  {
+    "status": "string",
+    "nos": 0,
+    "data": [
+      {
+        "name": "string",
+        "capital": "string",
+        "slogan": "string",
+        "established": "string",
+        "area": "string",
+        "postal_code": "string",
+        "website": "string",
+        "coordinate": "string",
+        "region": {
           "name": "string",
-          "state": {},
-          "region": {}
-        }
-      ]
-    }
-    ```
-
-  #### iii. get all states in a region
-
-  ```c
-  $ http://localhost:8000/api/v1/nigeria/{region}/lgas
-  ```
-
-  - response
-    ```json
-    {
-      "status": "string",
-      "nos": 0,
-      "data": [
-        {
-          "name": "string",
-          "capital": "string",
-          "slogan": "string",
-          "established": "string",
-          "area": "string",
-          "postal_code": "string",
-          "website": "string",
-          "coordinate": "string",
-          "region": {
-            "name": "string",
-            "states": ["string"],
-            "description": "string",
-            "major_ethnic_group": ["string"]
-          },
-          "population": {},
+          "states": ["string"],
           "description": "string",
-          "ethnic_groups": ["string"],
-          "lgas": ["string"],
-          "institutions": ["string"]
-        }
-      ]
-    }
-    ```
+          "major_ethnic_group": ["string"]
+        },
+        "population": {},
+        "description": "string",
+        "ethnic_groups": ["string"],
+        "lgas": ["string"],
+        "institutions": ["string"]
+      }
+    ]
+  }
+  ```
 
 ## Code Snippets
 
