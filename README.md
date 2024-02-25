@@ -22,8 +22,8 @@ This API uses a database of location data and a caching mechanism for better per
 
 ## Useful Links
 
-- [Swagger API Docs](https://)
-- [Hosted Link](https://)
+- [Swagger API Docs](https://capstone-portfolio-project-at-altschool.onrender.com/api-docs)
+- [Hosted Link](https://capstone-portfolio-project-at-altschool.onrender.com/)
 
 ## Installation and Usage
 
@@ -428,7 +428,7 @@ export default class customApiError extends Error {
 
 ## Documentation
 
-- #### links -
+- #### link - (https://capstone-portfolio-project-at-altschool.onrender.com/api-docs)
 
     <p align="center">
       <img src="./img/Screenshot%20from%202024-02-25%2008-22-12.png">
