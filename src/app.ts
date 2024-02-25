@@ -3,7 +3,7 @@ import express from 'express';
 import rateLimit from 'express-rate-limit';
 import cors from 'cors';
 
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
 import { connectDB } from './db/connect';
 import swaggerUi from 'swagger-ui-express';
 
