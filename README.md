@@ -352,7 +352,19 @@ connectDB(process.env.MONGODB_URI)
 - #### links -
 
     <p align="center">
-      <img src="https://www.github.com/baccrie/Capstone-Portfolio-Project-at-ALTSchool-Africa/blob/main/img/Screenshot%20from%202024-02-25%2008-22-12.png" width="686" height="289">
+      <img src="./img/Screenshot%20from%202024-02-25%2008-22-12.png">
+    </p>
+
+    <p align="center">
+      <img src="./img/Screenshot%20from%202024-02-25%2008-22-31.png">
+    </p>
+
+    <p align="center">
+      <img src="./img/Screenshot%20from%202024-02-25%2008-22-48.png">
+    </p>
+
+     <p align="center">
+      <img src="./img/Screenshot%20from%202024-02-25%2008-22-54.png">
     </p>
 
 - #### images
