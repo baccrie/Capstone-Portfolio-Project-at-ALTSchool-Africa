@@ -24,7 +24,7 @@ function populateRegion() {
             yield region_1.default.deleteMany();
             const res = yield region_1.default.create(region_json_1.default);
             console.log(`Done...`);
-            process.exit(0);
+            process.exit();
         }
         catch (err) {
             process.exit(1);
@@ -32,5 +32,5 @@ function populateRegion() {
     });
 }
 exports.populateRegion = populateRegion;
-//populateRegion();
+populateRegion();
 //# sourceMappingURL=populate-region.js.map

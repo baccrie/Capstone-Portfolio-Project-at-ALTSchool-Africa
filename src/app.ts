@@ -61,8 +61,6 @@ connectDB(process.env.MONGODB_URI)
   })
   .then(() => {
     if (process.env.NODE_ENV === 'production') {
-      populateRegion();
-      populateStateAndLga();
       console.log('Database successfully loaded and populated..');
     }
   })

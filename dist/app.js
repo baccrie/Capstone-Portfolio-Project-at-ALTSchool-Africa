@@ -16,8 +16,6 @@ const auth_1 = __importDefault(require("./routes/auth"));
 const admin_1 = __importDefault(require("./routes/admin"));
 const error_handler_1 = require("./middleware/error-handler");
 const not_found_1 = require("./middleware/not-found");
-const populate_region_1 = require("./populate/populate-region");
-const populate_state_1 = require("./populate/populate-state");
 let openApiDocumentation = require('./docs.json');
 const check_api_key_1 = __importDefault(require("./middleware/check-api-key"));
 // initializing express server
@@ -55,8 +53,6 @@ app.use(not_found_1.notFound);
 })
     .then(() => {
     if (process.env.NODE_ENV === 'production') {
-        (0, populate_region_1.populateRegion)();
-        (0, populate_state_1.populateStateAndLga)();
         console.log('Database successfully loaded and populated..');
     }
 })

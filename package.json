@@ -4,7 +4,7 @@
   "description": "Altschool Africa Capstone Project (locale api)",
   "main": "./src/app.js",
   "scripts": {
-    "populateDB": "&& node ./dist/populate/populate-region && node ./dist/populate/populate-state",
+    "populateDB": "node ./dist/populate/populate-region && node ./dist/populate/populate-state",
     "build": "rm -rf ./dist && npx tsc",
     "start": "npm run build && cp ./src/docs.json ./dist && nodemon dist/app.js"
   },

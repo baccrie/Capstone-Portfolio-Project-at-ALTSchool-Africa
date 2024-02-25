@@ -9,10 +9,10 @@ export async function populateRegion() {
     await Region.deleteMany();
     const res = await Region.create(allRegions);
     console.log(`Done...`);
-    process.exit(0);
+    process.exit();
   } catch (err) {
     process.exit(1);
   }
 }
 
-//populateRegion();
+populateRegion();
