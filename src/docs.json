@@ -604,6 +604,7 @@
                     "status": "success",
                     "msg": "Found result in <category>",
                     "data": []
+                  }
                 }
               }
             }

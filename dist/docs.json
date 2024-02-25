@@ -482,76 +482,6 @@
       }
     },
 
-    "/api/v1/nigeria/search": {
-      "get": {
-        "tags": ["Search"],
-        "summary": "Search for lgas , state  or Region",
-        "operationId": "search",
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "keyword",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Search"
-            }
-          }
-        ],
-
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SearchResponse"
-                }
-              }
-            }
-          },
-
-          "400": {
-            "description": "BadRequest Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BadRequestError"
-                }
-              }
-            }
-          },
-
-          "401": {
-            "description": "Authentication Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AuthenticationError"
-                }
-              }
-            }
-          },
-
-          "500": {
-            "description": "Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServerError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-
     "/api/v1/nigeria/lgas": {
       "get": {
         "tags": ["General"],
@@ -589,7 +519,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LgaRes"
+                  "$ref": "#/components/schemas/LgaRes",
+                  "example": {
+                    "status": "success",
+                    "nos": 768,
+                    "noOfPages": 1,
+                    "data": []
+                  }
                 }
               }
             }
@@ -601,6 +537,89 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError",
+                  "example": {
+                    "status": "failed",
+                    "msg": "api key is missing in request header"
+                  }
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/nigeria/search": {
+      "get": {
+        "tags": ["Search"],
+        "summary": "Search for lgas , state  or Region",
+        "operationId": "search",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Search"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse",
+                  "example": {
+                    "status": "success",
+                    "msg": "Found result in <category>",
+                    "data": []
+                  }
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "BadRequest Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError",
+                  "example": {
+                    "status": "failed",
+                    "msg": "Invalid search key, search by state, lga or region name pls.."
+                  }
                 }
               }
             }
