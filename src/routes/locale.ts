@@ -19,9 +19,9 @@ import { getAllR, getAllS, getAllL } from '../middleware/cache';
 router.get('/search', search);
 
 // general endpoints
-router.get('/regions', getAllR, getAllRegions);
-router.get('/states', getAllS, getAllStates);
-router.get('/lgas', getAllL, getAllLgas);
+router.get('/regions', getAllRegions);
+router.get('/states', getAllStates);
+router.get('/lgas', getAllLgas);
 
 //specific endpoints
 router.get('/:region/lgas', lgasInRegion);
