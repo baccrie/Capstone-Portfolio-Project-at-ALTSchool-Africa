@@ -1,11 +1,11 @@
-let { capitalize } = require('../utils/capitalize-first-letter');
+import { capitalize, trim } from '../utils/capitalize-first-letter';
 import { Request, Response, NextFunction } from 'express';
-let Region = require('../models/region');
-let State = require('../models/state');
-let Lga = require('../models/lga');
+import Region, { IRegion } from '../models/region';
+import Lga, { ILga } from '../models/lga';
+import State, { IState } from '../models/state';
 
 let { StatusCodes } = require('http-status-codes');
-let BadRequestError = require('../errors/bad-request');
+import BadRequestError from '../errors/bad-request';
 
 // Region
 
@@ -23,7 +23,7 @@ export async function createRegion(
     // check if region exists
     const check = await Region.findOne({ name });
     if (check) {
-      throw new BadRequestError('Region with name already exists...');
+      throw new BadRequestError('Region with name already exists...', 400);
     }
 
     // else continue
@@ -62,7 +62,8 @@ export async function updateRegion(
 
     if (!check) {
       throw new BadRequestError(
-        'The region you re trying to update dosent exist!'
+        'The region you re trying to update dosent exist!',
+        401
       );
     }
 
@@ -101,7 +102,8 @@ export async function deleteRegion(
 
     if (!regionToDelete || regionToDelete.length < 1) {
       throw new BadRequestError(
-        'The region you re trying to delete dosent exist!'
+        'The region you re trying to delete dosent exist!',
+        400
       );
     }
 
@@ -141,10 +143,16 @@ export async function createState(
     let { region } = req.params;
     region = capitalize(region);
 
-    const regionToAddState = await Region.findOne({ name: region });
+    // const regg = await Region.find({ name: region });
+    // console.log(regg);
+
+    const regionToAddState: any = await Region.findOne({ name: region });
+
+    console.log(regionToAddState);
     if (!regionToAddState) {
       throw new BadRequestError(
-        'the region in which you re trying to add a state is invalid...'
+        'the region in which you re trying to add a state is invalid...',
+        400
       );
     }
 
@@ -154,7 +162,7 @@ export async function createState(
     });
 
     if (check) {
-      throw new BadRequestError('State with name already exists');
+      throw new BadRequestError('State with name already exists', 400);
     }
     const {
       name,
@@ -238,7 +246,8 @@ export async function updateState(
 
     if (!regionToUpdateState) {
       throw new BadRequestError(
-        'The region from which you re trying to update a state dosent exists!!!'
+        'The region from which you re trying to update a state dosent exists!!!',
+        400
       );
     }
 
@@ -249,22 +258,27 @@ export async function updateState(
     });
 
     if (!stateToUpdate) {
-      throw new BadRequestError('State dosent exist in region!!!');
+      throw new BadRequestError('State dosent exist in region!!!', 400);
     }
 
     // check if states name is not been overwritten to avoid duplicate state name
     const check = await State.findOne({ name: queryObj.name });
     if (check) {
       throw new BadRequestError(
-        'the name provided in the request body belongs to another state, pls choose another name'
+        'the name provided in the request body belongs to another state, pls choose another name',
+        400
       );
     }
 
     //Update Lga and save
-    const data = await State.findByIdAndUpdate(stateToUpdate._id, queryObj, {
-      runValidators: true,
-      new: true,
-    });
+    const data: any = await State.findByIdAndUpdate(
+      stateToUpdate._id,
+      queryObj,
+      {
+        runValidators: true,
+        new: true,
+      }
+    );
 
     res.status(201).json({
       status: 'success',
@@ -288,13 +302,14 @@ export async function deleteState(
     region = capitalize(region);
 
     // check region validity
-    const regionToDeleteState = await Region.findOne({
+    const regionToDeleteState: any = await Region.findOne({
       name: region,
     });
 
     if (!regionToDeleteState) {
       throw new BadRequestError(
-        'The region from which you re trying to delete a state dosent exists!!!'
+        'The region from which you re trying to delete a state dosent exists!!!',
+        400
       );
     }
 
@@ -305,7 +320,7 @@ export async function deleteState(
     });
 
     if (!stateToDelete) {
-      throw new BadRequestError('State dosent exist in region!!!');
+      throw new BadRequestError('State dosent exist in region!!!', 400);
     }
 
     // Delete state, delete state from region , delete all lgas with state
@@ -350,13 +365,14 @@ export async function createLga(
     state = capitalize(state);
     region = capitalize(region);
 
-    const stateToAddLga = await State.findOne({
+    const stateToAddLga: any = await State.findOne({
       name: state,
     });
 
     if (!stateToAddLga) {
       throw new BadRequestError(
-        'the state you re trying to create a lga for dosent exists..'
+        'the state you re trying to create a lga for dosent exists..',
+        400
       );
     }
 
@@ -365,7 +381,7 @@ export async function createLga(
     });
 
     if (!regionToAddLga) {
-      throw new BadRequestError('Oops region is invalid!!');
+      throw new BadRequestError('Oops region is invalid!!', 400);
     }
 
     // check if lga exists under state and region
@@ -374,7 +390,10 @@ export async function createLga(
       state: stateToAddLga._id,
     });
     if (check) {
-      throw new BadRequestError('Lga already exists in state and region!!!');
+      throw new BadRequestError(
+        'Lga already exists in state and region!!!',
+        400
+      );
     }
 
     const lga = await Lga.create({
@@ -415,7 +434,8 @@ export async function updateLga(
 
     if (!stateToAddLga) {
       throw new BadRequestError(
-        'The state from which you re trying to update a lga dosent exists!!!'
+        'The state from which you re trying to update a lga dosent exists!!!',
+        400
       );
     }
 
@@ -426,7 +446,7 @@ export async function updateLga(
     });
 
     if (!lgaToUpdate) {
-      throw new BadRequestError('Lga dosent exist in state!!!');
+      throw new BadRequestError('Lga dosent exist in state!!!', 400);
     }
 
     //Update Lga and save
@@ -456,13 +476,14 @@ export async function deleteLga(
     state = capitalize(state);
 
     // check state validity
-    const stateToDeleteLga = await State.findOne({
+    const stateToDeleteLga: any = await State.findOne({
       name: state,
     });
 
     if (!stateToDeleteLga) {
       throw new BadRequestError(
-        'The state from which you re trying to delete a lga dosent exists!!!'
+        'The state from which you re trying to delete a lga dosent exists!!!',
+        400
       );
     }
 
@@ -476,7 +497,7 @@ export async function deleteLga(
     //console.log(lgaToDelete);
 
     if (!lgaToDelete) {
-      throw new BadRequestError('Lga dosent exist in state!!!');
+      throw new BadRequestError('Lga dosent exist in state!!!', 400);
     }
     // Delete lga and also delete from state
     const index = stateToDeleteLga.lgas.findIndex(
