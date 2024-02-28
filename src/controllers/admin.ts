@@ -364,6 +364,7 @@ export async function createLga(
 
     state = capitalize(state);
     region = capitalize(region);
+    name = trim(name);
 
     const stateToAddLga: any = await State.findOne({
       name: state,
@@ -382,6 +383,14 @@ export async function createLga(
 
     if (!regionToAddLga) {
       throw new BadRequestError('Oops region is invalid!!', 400);
+    }
+
+    // check if state is under region
+    if (stateToAddLga.region !== regionToAddLga._id) {
+      throw new BadRequestError(
+        'Oops, the state you re trying to create an lga for dosent exist under the region',
+        400
+      );
     }
 
     // check if lga exists under state and region
