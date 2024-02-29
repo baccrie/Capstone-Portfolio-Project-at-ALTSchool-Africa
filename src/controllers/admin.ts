@@ -52,7 +52,6 @@ export async function updateRegion(
 
     name = capitalize(name);
     region = capitalize(region);
-    console.log(req.params);
     const newRegionObj = { name, description, major_ethnic_group };
 
     // check if region exists
@@ -148,7 +147,6 @@ export async function createState(
 
     const regionToAddState: any = await Region.findOne({ name: region });
 
-    console.log(regionToAddState);
     if (!regionToAddState) {
       throw new BadRequestError(
         'the region in which you re trying to add a state is invalid...',
@@ -364,7 +362,6 @@ export async function createLga(
 
     state = capitalize(state);
     region = capitalize(region);
-    name = trim(name);
 
     const stateToAddLga: any = await State.findOne({
       name: state,
@@ -377,7 +374,7 @@ export async function createLga(
       );
     }
 
-    const regionToAddLga = await Region.findOne({
+    const regionToAddLga: any = await Region.findOne({
       name: region,
     });
 
@@ -385,28 +382,32 @@ export async function createLga(
       throw new BadRequestError('Oops region is invalid!!', 400);
     }
 
+    //console.log(regionToAddLga.states.includes(stateToAddLga._id));
+
     // check if state is under region
-    if (stateToAddLga.region !== regionToAddLga._id) {
+    if (!regionToAddLga.states.includes(stateToAddLga._id)) {
       throw new BadRequestError(
-        'Oops, the state you re trying to create an lga for dosent exist under the region',
+        'Oops, the state you re trying to create an lga for dosent exist under the specified region',
         400
       );
     }
 
-    // check if lga exists under state and region
-    const check = await Lga.findOne({
-      region: regionToAddLga._id,
-      state: stateToAddLga._id,
+    // check if lga exists under state
+    const check: any = await Lga.findOne({
+      name: trim(name),
     });
+
     if (check) {
-      throw new BadRequestError(
-        'Lga already exists in state and region!!!',
-        400
-      );
+      if (stateToAddLga.lgas.includes(check._id)) {
+        throw new BadRequestError(
+          'Lga already exists in state and region!!!',
+          400
+        );
+      }
     }
 
     const lga = await Lga.create({
-      name,
+      name: trim(name),
       state: stateToAddLga._id,
       region: regionToAddLga._id,
     });
@@ -435,6 +436,8 @@ export async function updateLga(
     let { state, lga } = req.params;
 
     state = capitalize(state);
+    name = trim(name);
+    lga = trim(lga);
 
     // check state validity
     const stateToAddLga = await State.findOne({
@@ -483,6 +486,7 @@ export async function deleteLga(
   try {
     let { state, lga } = req.params;
     state = capitalize(state);
+    lga = trim(lga);
 
     // check state validity
     const stateToDeleteLga: any = await State.findOne({
@@ -496,7 +500,6 @@ export async function deleteLga(
       );
     }
 
-    console.log(lga);
     // check lga vallidity
     const lgaToDelete = await Lga.findOne({
       name: lga,
