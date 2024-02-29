@@ -2074,11 +2074,6 @@
           "name": {
             "type": "string",
             "title": "username"
-          },
-
-          "region": {
-            "type": "string",
-            "title": "region"
           }
         },
         "type": "object",
