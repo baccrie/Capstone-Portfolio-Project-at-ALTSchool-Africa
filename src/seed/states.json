@@ -1965,5 +1965,24 @@
       "Tsafe",
       "Zurmi"
     ]
+  },
+  {
+    "name": "Abuja",
+    "capital": "null",
+    "slogan": "FCT",
+    "established": "12 December 1991",
+    "area": "1,476 km2 (570 sq mi)",
+    "ethnic_groups": ["Gwari", "Koro", "Ganagana", "Gwandara", "Afo", "Bassa"],
+    "population": {
+      "total": "1,693,400",
+      "estimate": "",
+      "density": "1,100/km2 (3,000/sq mi)"
+    },
+    "postal_code": "900211–900288",
+    "website": "http://fcta.gov.ng/",
+    "coordinate": "9°4′N 7°29′E",
+    "region": "North-Central",
+    "description": "The Federal Military Government of Nigeria, promulgated decree No. 6 on 4 February 1976, which initiated the removal of the Federal Capital from Lagos to Abuja. The initial work for Abuja's planning and implementation were carried out by the Military Government of General's Murtala Mohammed and Olusegun Obasanjo. However, the foundation of Abuja was under the Administration of Shehu Shagari in 1979. Construction started in 1979 but, due to economic and political instability, the initial stages of the city were not complete until the late 1980s.The move of Nigeria's Capital to Abuja was controversial, and the biggest opposition to it was led by Obafemi Awolowo.[36] Awolowo, as a politician and a representative of the Yoruba people, defended their claims against the move of the Capital from Lagos. During the hotly-contested campaign for the presidency, he vowed to hire the American Walt Disney Corporation to convert the new site (Abuja) into an amusement park if he was elected.[36] However, after his election as president, Alhaji Shehu Shagari laid the first foundation for Abuja's infrastructure and pushed for its early completion. His first journey outside of Lagos after his election was to Abuja, where he visited contractors and workers on site to urge a speedy completion of the project. On his return, he confided in Alhaji Abubakar Koko his disappointment with the slow progress of work.[36] Shehu Shagari rescheduled the planned relocation to Abuja from 1986 to 1982 which later proved difficult",
+    "lgas": ["Abaji", "Abuja Municipal", "Bwari", "Gwagwalada", "Kuje", "Kwali"]
   }
 ]
