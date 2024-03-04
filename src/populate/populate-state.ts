@@ -2,6 +2,7 @@ import { connectDB } from '../db/connect';
 import Region from '../models/region';
 import State from '../models/state';
 import Lga from '../models/lga';
+import { trim, capitalize } from '../utils/capitalize-first-letter';
 
 import allState from '../seed/states.json';
 require('dotenv').config();
@@ -20,7 +21,7 @@ export async function populateStateAndLga() {
 
       // console.log(stateRegion[0]._id);
       // console.log(state);
-      newState.name = state.name;
+      newState.name = capitalize(state.name);
       newState.capital = state.capital;
       newState.slogan = state.slogan;
       newState.established = state.established;
@@ -37,7 +38,7 @@ export async function populateStateAndLga() {
 
       for (const lga of state.lgas) {
         const newLga = new Lga();
-        newLga.name = lga;
+        newLga.name = trim(lga);
         newLga.state = newState._id;
         newLga.region = stateRegion[0]._id;
         newState.lgas.push(newLga._id);
