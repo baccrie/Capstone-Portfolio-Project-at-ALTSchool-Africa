@@ -27,7 +27,7 @@ This API uses a database of location data and a caching mechanism for better per
 
 ## Installation and Usage
 
-1. Clone to local repo.
+1. Clone to local.
 
 ```bash
   $ git clone https://github.com/baccrie/Capstone-Portfolio-Project-at-ALTSchool-Africa
@@ -38,7 +38,7 @@ This API uses a database of location data and a caching mechanism for better per
 ```bash
    $ export NODE_ENV=development
    $ export PORT=8000
-   $ export MONGODB_URI=mongodbURI
+   $ export MONGODB_URI=<YOUR MONGODB URI>
 ```
 
 3. install project dependencies
@@ -47,46 +47,68 @@ This API uses a database of location data and a caching mechanism for better per
   $ npm install
 ```
 
-4. populate database with data
+4. compile and build soruce codes to ts using npx tsc
+
+```bash
+  $ npm run build
+```
+
+5. populate database with locale data
 
 ```bash
   $ npm run populateDB
 ```
 
-5. build up with ts compiler and start app
+6. build up with ts compiler and start app
 
 ```bash
    $ npm start
 ```
 
+#### Notes
+
+For running the tests cases with
+
+```bash
+  $ npm test
+```
+
+steps 1 - 5 above must have been implemented otherwise running the test would throw an error
+
 ## Endpoints
 
 ### Notes on Usage
 
-1. The state schema contains a population property which is an Object and returns 3 key value pairs.
+#### 1. The swagger documentation of the project can be accessed by preceeding the base url with /api-docs see example below
 
-   - Total - total population of the state in question according to the 2006 population census data
-   - Estimate - estimated population of the state in question based on 2022 projection
-   - Density - density of the state with respect to the 2006 population census statistics
+- ```c
+  $ http://localhost:8000/api/v1/api-docs
+  ```
+
+#### 2. The state schema contains a population property which is an Object and returns 3 key value pairs.
+
+- Total - total population of the state in question according to the 2006 population census data
+- Estimate - estimated population of the state in question based on 2022 projection
+- Density - density of the state with respect to the 2006 population census statistics
 
 - #### example
 
-  ```json
-    "population":
-      {
-        "total": "9,401,288",
-        "estimate": "15,462,200",
-        "density": "470/km2 (1,200/sq mi)"
-      }
+- ```json
+   "population":
+     {
+       "total": "9,401,288",
+       "estimate": "15,462,200",
+       "density": "470/km2 (1,200/sq mi)"
+     }
   ```
 
-2. Data Caching - Owing to the fact that most of the routes requires a path parameter ,and response data might change on each request depending on this paramter, provided by the enduser. Caching was only adopted for the 3 general endpoints which are shown below.
+#### 3. Data Caching - Owing to the fact that most of the routes requires a path parameter ,and response data might change on each request depending on this paramter, provided by the enduser. Caching was only adopted for the 3 general endpoints which are shown below.
 
-   ```c
-   $ http://localhost:8000/api/v1/nigeria/regions
-   $ http://localhost:8000/api/v1/nigeria/states
-   $ http://localhost:8000/api/v1/nigeria/lgas
-   ```
+- ```c
+  $ http://localhost:8000/api/v1/nigeria/regions
+  $ http://localhost:8000/api/v1/nigeria/states
+  $ http://localhost:8000/api/v1/nigeria/lgas
+  ```
 
 ### 1. Auth Endpoint
 
@@ -98,9 +120,9 @@ This API uses a database of location data and a caching mechanism for better per
   $ http://localhost:8000/api/v1/nigeria/auth/signup
   ```
 
-  - request payload
+- request payload
 
-  ```json
+- ```json
   {
     "username": "string",
     "email": "string",
@@ -108,9 +130,9 @@ This API uses a database of location data and a caching mechanism for better per
   }
   ```
 
-  - response data
+- response data
 
-  ```json
+- ```json
   {
     "status": "string",
     "msg": "string",
@@ -447,3 +469,19 @@ export default class customApiError extends Error {
     </p>
 
 - #### images
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```

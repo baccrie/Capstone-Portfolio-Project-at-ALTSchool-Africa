@@ -56,4 +56,5 @@ app.use(not_found_1.notFound);
         console.log(`Server is listening to port ${PORT}....`);
     });
 });
+exports.default = app;
 //# sourceMappingURL=app.js.map

@@ -135,7 +135,7 @@ function search(req, res, next) {
                 throw new bad_request_1.default('Invalid search key, search by state, lga or region name pls..', 400);
             }
             const resType = data instanceof state_1.default
-                ? 'state'
+                ? 'State'
                 : data instanceof region_1.default
                     ? 'Region'
                     : 'Lga';

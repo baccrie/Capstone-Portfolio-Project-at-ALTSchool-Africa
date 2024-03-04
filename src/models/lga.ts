@@ -13,6 +13,7 @@ const lgaSchema = new Schema<ILga>(
     name: {
       type: String,
       required: true,
+      unique: true,
     },
 
     state: {

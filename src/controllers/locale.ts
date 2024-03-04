@@ -154,7 +154,7 @@ export async function search(req: Request, res: Response, next: NextFunction) {
 
     const resType =
       data instanceof State
-        ? 'state'
+        ? 'State'
         : data instanceof Region
         ? 'Region'
         : 'Lga';

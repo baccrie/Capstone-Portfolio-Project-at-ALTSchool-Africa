@@ -64,3 +64,5 @@ connectDB(process.env.MONGODB_URI)
       console.log(`Server is listening to port ${PORT}....`);
     });
   });
+
+export default app;

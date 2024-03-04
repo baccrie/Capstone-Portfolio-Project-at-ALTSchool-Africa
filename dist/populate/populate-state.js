@@ -17,6 +17,7 @@ const connect_1 = require("../db/connect");
 const region_1 = __importDefault(require("../models/region"));
 const state_1 = __importDefault(require("../models/state"));
 const lga_1 = __importDefault(require("../models/lga"));
+const capitalize_first_letter_1 = require("../utils/capitalize-first-letter");
 const states_json_1 = __importDefault(require("../seed/states.json"));
 require('dotenv').config();
 function populateStateAndLga() {
@@ -33,7 +34,7 @@ function populateStateAndLga() {
                 });
                 // console.log(stateRegion[0]._id);
                 // console.log(state);
-                newState.name = state.name;
+                newState.name = (0, capitalize_first_letter_1.capitalize)(state.name);
                 newState.capital = state.capital;
                 newState.slogan = state.slogan;
                 newState.established = state.established;
@@ -49,7 +50,7 @@ function populateStateAndLga() {
                 newState.institutions = state.institutions;
                 for (const lga of state.lgas) {
                     const newLga = new lga_1.default();
-                    newLga.name = lga;
+                    newLga.name = (0, capitalize_first_letter_1.trim)(lga);
                     newLga.state = newState._id;
                     newLga.region = stateRegion[0]._id;
                     newState.lgas.push(newLga._id);

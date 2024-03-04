@@ -24,6 +24,7 @@ const stateSchema = new Schema<IState>(
       type: String,
       // unique: [true, 'name already exists'],
       required: [true, 'name cannot be empty'],
+      unique: true,
     },
 
     capital: {

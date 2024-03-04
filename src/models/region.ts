@@ -13,6 +13,7 @@ const regionSchema = new Schema<IRegion>(
     name: {
       type: String,
       required: [true, 'name cannot be empty'],
+      unique: true,
     },
 
     states: [
