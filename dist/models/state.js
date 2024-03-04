@@ -6,6 +6,7 @@ const stateSchema = new mongoose_1.Schema({
         type: String,
         // unique: [true, 'name already exists'],
         required: [true, 'name cannot be empty'],
+        unique: true,
     },
     capital: {
         type: String,

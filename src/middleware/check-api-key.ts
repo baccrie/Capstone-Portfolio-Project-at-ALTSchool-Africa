@@ -18,13 +18,14 @@ export default async function checkApiKey(
     }
 
     // validate key
-    const check = await User.findOne({
+    const user = await User.findOne({
       api_key: apiKey,
     });
 
-    if (!check) {
+    if (!user) {
       throw new authenticationError('Invalid Api Key', 401);
     }
+
     next();
   } catch (err) {
     next(err);

@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const joi_1 = __importDefault(require("joi"));
 exports.default = joi_1.default.object({
     email: joi_1.default.string().email().required(),
-    username: joi_1.default.string().alphanum().min(3).max(30).required(),
-    password: joi_1.default.string().required().alphanum(),
+    username: joi_1.default.string().alphanum().min(3).max(30).required().trim(),
+    password: joi_1.default.string().required().alphanum().trim(),
 });
 //# sourceMappingURL=user.js.map

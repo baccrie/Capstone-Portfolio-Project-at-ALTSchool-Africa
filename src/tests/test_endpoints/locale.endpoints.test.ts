@@ -123,3 +123,14 @@ describe('Search endpoints', () => {
     expect(response.body.msg).toBe('Found result in Region');
   });
 });
+function beforeAll(arg0: () => Promise<void>) {
+  throw new Error('Function not implemented.');
+}
+
+function afterAll(arg0: () => Promise<void>) {
+  throw new Error('Function not implemented.');
+}
+
+function expect(status: number) {
+  throw new Error('Function not implemented.');
+}

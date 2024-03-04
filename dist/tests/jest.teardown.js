@@ -1,4 +1,12 @@
 "use strict";
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable indent */
+// import mongoose from 'mongoose';
+// import { MongoMemoryServer } from 'mongodb-memory-server';
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -12,28 +20,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const unauthenticated_1 = __importDefault(require("../errors/unauthenticated"));
+// const mongoDB = new MongoMemoryServer();
+// /**
+//  * Drop database, close the connection and stop mongod.
+//  */
+// export default async () => {
+//   await mongoose.connection.dropDatabase();
+//   await mongoose.connection.close();
+//   await mongoDB.stop();
+// };
+const mongoose_1 = __importDefault(require("mongoose"));
 const user_1 = __importDefault(require("../models/user"));
-function checkApiKey(req, res, next) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const apiKey = req.headers.apikey;
-            if (!apiKey) {
-                throw new unauthenticated_1.default('api key is missing in request header', 401);
-            }
-            // validate key
-            const user = yield user_1.default.findOne({
-                api_key: apiKey,
-            });
-            if (!user) {
-                throw new unauthenticated_1.default('Invalid Api Key', 401);
-            }
-            next();
-        }
-        catch (err) {
-            next(err);
-        }
-    });
-}
-exports.default = checkApiKey;
-//# sourceMappingURL=check-api-key.js.map
+/*
+    Drop Dabatabase and close connection
+*/
+exports.default = () => __awaiter(void 0, void 0, void 0, function* () {
+    yield user_1.default.deleteMany({});
+    yield mongoose_1.default.connection.close();
+});
+//# sourceMappingURL=jest.teardown.js.map

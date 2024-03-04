@@ -1,4 +1,5 @@
 "use strict";
+// const mongoDB = new MongoMemoryServer();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -12,28 +13,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const unauthenticated_1 = __importDefault(require("../errors/unauthenticated"));
+exports.connectToDatabase = void 0;
+const connect_1 = require("../db/connect");
 const user_1 = __importDefault(require("../models/user"));
-function checkApiKey(req, res, next) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const apiKey = req.headers.apikey;
-            if (!apiKey) {
-                throw new unauthenticated_1.default('api key is missing in request header', 401);
-            }
-            // validate key
-            const user = yield user_1.default.findOne({
-                api_key: apiKey,
-            });
-            if (!user) {
-                throw new unauthenticated_1.default('Invalid Api Key', 401);
-            }
-            next();
-        }
-        catch (err) {
-            next(err);
-        }
+const connectToDatabase = () => __awaiter(void 0, void 0, void 0, function* () {
+    // conect to the database
+    yield (0, connect_1.connectDB)(process.env.MONGODB_URI);
+    // await create a test user with api key
+    yield user_1.default.create({
+        _id: '65db4c5428e883e3affcc6c8',
+        username: 'baccrie',
+        email: 'test@test.com',
+        password: '3injwed9$ghwjU&buhwbOInq67u92h8',
+        api_key: '82hikjenf719&#Y*@!IKN877y',
     });
-}
-exports.default = checkApiKey;
-//# sourceMappingURL=check-api-key.js.map
+});
+exports.connectToDatabase = connectToDatabase;
+//# sourceMappingURL=jest.setup.js.map

@@ -5,6 +5,7 @@ const regionSchema = new mongoose_1.Schema({
     name: {
         type: String,
         required: [true, 'name cannot be empty'],
+        unique: true,
     },
     states: [
         {
