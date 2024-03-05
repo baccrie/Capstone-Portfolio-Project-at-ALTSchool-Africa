@@ -9,10 +9,10 @@ require('dotenv').config();
 
 export async function populateStateAndLga() {
   try {
-    console.log();
     await connectDB(process.env.MONGODB_URI);
-    await State.deleteMany();
-    await Lga.deleteMany();
+    await State.deleteMany({});
+    await Lga.deleteMany({});
+
     for (const state of allState) {
       const newState: any = new State();
       let stateRegion: any = await Region.find({
@@ -47,13 +47,16 @@ export async function populateStateAndLga() {
       }
 
       stateRegion[0].states.push(newState._id);
+
       stateRegion[0].save();
       newState.save();
 
-      console.log(newState.name, 'is done....');
+      //console.log(newState.name, 'is done....');
+      console.log(`${newState.name} was created under ${stateRegion[0].name}`);
     }
     console.log('Done');
   } catch (error) {
+    //console.log(error);
     process.exit(1);
   }
 }

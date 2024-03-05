@@ -76,7 +76,7 @@ export async function updateRegion(
       }
     );
 
-    res.status(200).json({
+    res.status(201).json({
       status: 'success',
       data: updatedRegion,
     });
@@ -200,7 +200,7 @@ export async function createState(
     regionToAddState.states.push(newState._id);
     await regionToAddState.save();
 
-    res.status(200).json({
+    res.status(201).json({
       status: 'success',
       data: newState,
     });
@@ -358,10 +358,9 @@ export async function createLga(
 ) {
   try {
     let { state } = req.params;
-    let { name, region } = req.body;
+    let { name } = req.body;
 
     state = capitalize(state);
-    region = capitalize(region);
 
     const stateToAddLga: any = await State.findOne({
       name: state,
@@ -375,9 +374,10 @@ export async function createLga(
     }
 
     const regionToAddLga: any = await Region.findOne({
-      name: region,
+      _id: stateToAddLga.region,
     });
 
+    //console.log(regionToAddLga);
     if (!regionToAddLga) {
       throw new BadRequestError('Oops region is invalid!!', 400);
     }
@@ -468,7 +468,7 @@ export async function updateLga(
     res.status(201).json({
       status: 'success',
       data: {
-        lgaToUpdate,
+        ...lgaToUpdate._doc,
       },
     });
   } catch (err) {

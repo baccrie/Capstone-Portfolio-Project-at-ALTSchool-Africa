@@ -21,6 +21,10 @@
 import mongoose from 'mongoose';
 import { connectDB } from '../db/connect';
 import User from '../models/user';
+import Region from '../models/region';
+import State from '../models/state';
+import Lga from '../models/lga';
+import { lgasInState } from '../controllers/locale';
 
 /*
     Drop Dabatabase and close connection    
@@ -34,5 +38,18 @@ export default async () => {
     password: '3injwed9$ghwjU&buhwbOInq67u92h8',
     api_key: '82hikjenf719&#Y*@!IKN877y',
   });
+
+  await Region.deleteOne({
+    name: 'Tested-Region',
+  });
+
+  await State.deleteOne({
+    name: 'Driftmark',
+  });
+
+  await Lga.deleteOne({
+    name: 'Storms-End',
+  });
+
   await mongoose.connection.close();
 };

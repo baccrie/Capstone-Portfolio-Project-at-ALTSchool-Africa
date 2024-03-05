@@ -29,7 +29,7 @@ function checkSuperUser(req, res, next) {
                 throw new unauthenticated_1.default('Invalid Api Key', 401);
             }
             if (!user.is_superUser) {
-                throw new unauthenticated_1.default('Onlu super users can perform this operation', 401);
+                throw new unauthenticated_1.default('Oops! only super users can perform this operation', 401);
             }
             next();
         }

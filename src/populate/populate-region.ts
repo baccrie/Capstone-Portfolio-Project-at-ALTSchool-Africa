@@ -1,6 +1,8 @@
 import { connectDB } from '../db/connect';
 import Region from '../models/region';
 import allRegions from '../seed/region.json';
+import { trim, capitalize } from '../utils/capitalize-first-letter';
+
 require('dotenv').config();
 
 export async function populateRegion() {

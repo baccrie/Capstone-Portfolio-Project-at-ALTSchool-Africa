@@ -23,10 +23,9 @@ require('dotenv').config();
 function populateStateAndLga() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            console.log();
             yield (0, connect_1.connectDB)(process.env.MONGODB_URI);
-            yield state_1.default.deleteMany();
-            yield lga_1.default.deleteMany();
+            yield state_1.default.deleteMany({});
+            yield lga_1.default.deleteMany({});
             for (const state of states_json_1.default) {
                 const newState = new state_1.default();
                 let stateRegion = yield region_1.default.find({
@@ -59,11 +58,13 @@ function populateStateAndLga() {
                 stateRegion[0].states.push(newState._id);
                 stateRegion[0].save();
                 newState.save();
-                console.log(newState.name, 'is done....');
+                //console.log(newState.name, 'is done....');
+                console.log(`${newState.name} was created under ${stateRegion[0].name}`);
             }
             console.log('Done');
         }
         catch (error) {
+            //console.log(error);
             process.exit(1);
         }
     });

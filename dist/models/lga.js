@@ -5,7 +5,6 @@ const lgaSchema = new mongoose_1.Schema({
     name: {
         type: String,
         required: true,
-        unique: true,
     },
     state: {
         type: mongoose_1.Schema.Types.ObjectId,

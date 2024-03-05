@@ -67,7 +67,7 @@ function updateRegion(req, res, next) {
                 runValidators: true,
                 new: true,
             });
-            res.status(200).json({
+            res.status(201).json({
                 status: 'success',
                 data: updatedRegion,
             });
@@ -154,7 +154,7 @@ function createState(req, res, next) {
             const newState = yield state_1.default.create(queryObj);
             regionToAddState.states.push(newState._id);
             yield regionToAddState.save();
-            res.status(200).json({
+            res.status(201).json({
                 status: 'success',
                 data: newState,
             });
@@ -273,9 +273,8 @@ function createLga(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let { state } = req.params;
-            let { name, region } = req.body;
+            let { name } = req.body;
             state = (0, capitalize_first_letter_1.capitalize)(state);
-            region = (0, capitalize_first_letter_1.capitalize)(region);
             const stateToAddLga = yield state_1.default.findOne({
                 name: state,
             });
@@ -283,8 +282,9 @@ function createLga(req, res, next) {
                 throw new bad_request_1.default('the state you re trying to create a lga for dosent exists..', 400);
             }
             const regionToAddLga = yield region_1.default.findOne({
-                name: region,
+                _id: stateToAddLga.region,
             });
+            //console.log(regionToAddLga);
             if (!regionToAddLga) {
                 throw new bad_request_1.default('Oops region is invalid!!', 400);
             }
@@ -350,9 +350,7 @@ function updateLga(req, res, next) {
             lgaToUpdate.save();
             res.status(201).json({
                 status: 'success',
-                data: {
-                    lgaToUpdate,
-                },
+                data: Object.assign({}, lgaToUpdate._doc),
             });
         }
         catch (err) {
