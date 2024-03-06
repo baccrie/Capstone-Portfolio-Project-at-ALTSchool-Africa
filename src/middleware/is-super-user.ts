@@ -11,10 +11,7 @@ export default async function checkSuperUser(
     const apiKey = req.headers.apikey;
 
     if (!apiKey) {
-      throw new authenticationError(
-        'api key is missing in request header',
-        401
-      );
+      throw new authenticationError('api key is missing in request header');
     }
 
     // validate key
@@ -23,13 +20,12 @@ export default async function checkSuperUser(
     });
 
     if (!user) {
-      throw new authenticationError('Invalid Api Key', 401);
+      throw new authenticationError('Invalid Api Key');
     }
 
     if (!user.is_superUser) {
       throw new authenticationError(
-        'Oops! only super users can perform this operation',
-        401
+        'Oops! only super users can perform this operation'
       );
     }
     next();

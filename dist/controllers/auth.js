@@ -23,7 +23,7 @@ function signUp(req, res, next) {
         try {
             const { error } = user_2.default.validate(req.body);
             if (error) {
-                throw new bad_request_1.default(error.details[0].message, 401);
+                throw new bad_request_1.default(error.details[0].message);
             }
             const { username, email, password } = req.body;
             // check if user exists
@@ -31,7 +31,7 @@ function signUp(req, res, next) {
                 email,
             });
             if (checkUser) {
-                throw new bad_request_1.default('User with email already exists.', 401);
+                throw new bad_request_1.default('User with email already exists.');
             }
             // hash password and gen api-key
             const apiKey = (0, generate_api_key_1.default)();

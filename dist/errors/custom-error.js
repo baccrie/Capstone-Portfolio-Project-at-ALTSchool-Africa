@@ -1,9 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class customApiError extends Error {
-    constructor(message, statusCode) {
+    constructor(message) {
         super(message);
-        this.statusCode = statusCode;
     }
 }
 exports.default = customApiError;

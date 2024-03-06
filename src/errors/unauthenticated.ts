@@ -3,8 +3,10 @@ import customApiError from './custom-error';
 import { StatusCodes } from 'http-status-codes';
 
 export default class UnauthenticatedError extends customApiError {
-  constructor(msg: string, statusCode: number) {
-    super(msg, statusCode);
+  statusCode: StatusCodes;
+
+  constructor(msg: string) {
+    super(msg);
     this.statusCode = StatusCodes.UNAUTHORIZED;
   }
 }

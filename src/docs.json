@@ -1126,7 +1126,7 @@
       }
     },
 
-    "/update/region/{region}": {
+    "/api/v1/nigeria/update/region/{region}": {
       "patch": {
         "tags": ["Admin-Update"],
         "summary": "Update a Region",
@@ -1210,7 +1210,7 @@
       }
     },
 
-    "/update/state/{region}/{state}": {
+    "/api/v1/nigeria/update/state/{region}/{state}": {
       "patch": {
         "tags": ["Admin-Update"],
         "summary": "update state info in a region",
@@ -1305,7 +1305,7 @@
       }
     },
 
-    "/update/lga/{state}/{lga}": {
+    "/api/v1/nigeria/update/lga/{state}/{lga}": {
       "patch": {
         "tags": ["Admin-Update"],
         "summary": "update lga in state",
@@ -1400,7 +1400,7 @@
       }
     },
 
-    "/delete/region/{region}": {
+    "/api/v1/nigeria/delete/region/{region}": {
       "delete": {
         "tags": ["Admin-Delete"],
         "summary": "delete region",
@@ -1473,7 +1473,7 @@
       }
     },
 
-    "/delete/state/{region}/{state}": {
+    "/api/v1/nigeria/delete/state/{region}/{state}": {
       "delete": {
         "tags": ["Admin-Delete"],
         "summary": "delete state",
@@ -1557,7 +1557,7 @@
       }
     },
 
-    "/delete/lga/{state}/{lga}": {
+    "/api/v1/nigeria/delete/lga/{state}/{lga}": {
       "delete": {
         "tags": ["Admin-Delete"],
         "summary": "delete lga",

@@ -4,11 +4,8 @@ export interface CustomError extends Error {
 }
 
 export default class customApiError extends Error {
-  statusCode: number;
-  message: any;
-
-  constructor(message: string, statusCode: number) {
+  statusCode!: number;
+  constructor(message: string) {
     super(message);
-    this.statusCode = statusCode;
   }
 }

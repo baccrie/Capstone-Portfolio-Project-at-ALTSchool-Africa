@@ -61,7 +61,7 @@ export async function getAllStates(
     const data = await states;
 
     if (!data || data.length < 1) {
-      throw new BadRequestError('Invalid query.', 400);
+      throw new BadRequestError('Invalid query.');
     }
 
     res.status(200).json({
@@ -103,7 +103,7 @@ export async function getAllLgas(
 
     // check for empty result set
     if (!data || data.length < 1) {
-      throw new BadRequestError('Invalid query provided...', 400);
+      throw new BadRequestError('Invalid query provided...');
     }
 
     res.status(200).json({
@@ -147,8 +147,7 @@ export async function search(req: Request, res: Response, next: NextFunction) {
 
     if (!data || data === null) {
       throw new BadRequestError(
-        'Invalid search key, search by state, lga or region name pls..',
-        400
+        'Invalid search key, search by state, lga or region name pls..'
       );
     }
 
@@ -189,7 +188,7 @@ export async function lgasInRegion(
 
     // check region validity
     if (!getRegion) {
-      throw new BadRequestError('The region is invalid....', 400);
+      throw new BadRequestError('The region is invalid....');
     }
 
     // get lgas in Region
@@ -215,7 +214,7 @@ export async function lgasInRegion(
     const data = await lga;
 
     if (!data || data.length < 1) {
-      throw new BadRequestError('Invalid query.', 400);
+      throw new BadRequestError('Invalid query.');
     }
 
     res.status(200).json({
@@ -254,19 +253,18 @@ export async function lgasInState(
 
     // check region existence
     if (!getRegion) {
-      throw new BadRequestError('The region is invalid...', 400);
+      throw new BadRequestError('The region is invalid...');
     }
 
     // check state existence
     if (!getState) {
-      throw new BadRequestError('The state is invalid...', 400);
+      throw new BadRequestError('The state is invalid...');
     }
 
     // check existence of state in region
     if (!(getRegionName.name === getRegion.name)) {
       throw new BadRequestError(
-        'The state dosent exist for the particular region...',
-        400
+        'The state dosent exist for the particular region...'
       );
     }
 
@@ -293,7 +291,7 @@ export async function lgasInState(
     const noOfPages = Math.ceil(totalNo / limit) || 1;
 
     if (!data || data.length < 1) {
-      throw new BadRequestError('Invalid query.', 400);
+      throw new BadRequestError('Invalid query.');
     }
 
     res.status(200).json({
@@ -320,7 +318,7 @@ export async function statesInRegion(
     });
 
     if (!getRegion) {
-      throw new BadRequestError('The region is invalid....', 400);
+      throw new BadRequestError('The region is invalid....');
     }
 
     const data = await State.find({
@@ -328,7 +326,7 @@ export async function statesInRegion(
     }).select('-lgas -__v');
 
     if (!data || data.length < 1) {
-      throw new BadRequestError('Invalid query.', 400);
+      throw new BadRequestError('Invalid query.');
     }
 
     res.status(200).json({

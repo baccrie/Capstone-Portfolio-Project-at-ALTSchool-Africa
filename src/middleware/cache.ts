@@ -80,7 +80,7 @@ export async function getAllS(req: Request, res: Response, next: NextFunction) {
       await redisClient.set('getAllStates', JSON.stringify(data), 'EX', 100);
 
       if (!data || data.length < 1) {
-        throw new BadRequestError('Invalid query.', 400);
+        throw new BadRequestError('Invalid query.');
       }
 
       next();
@@ -131,7 +131,7 @@ export async function getAllL(req: Request, res: Response, next: NextFunction) {
       await redisClient.set('getAllLgas', JSON.stringify(data), 'EX', 100);
       next();
       if (!data || data.length < 1) {
-        throw new BadRequestError('Invalid query.', 400);
+        throw new BadRequestError('Invalid query.');
       }
     }
   } catch (err) {

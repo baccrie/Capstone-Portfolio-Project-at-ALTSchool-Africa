@@ -58,7 +58,7 @@ function getAllStates(req, res, next) {
             const noOfPages = Math.ceil(totalNo / limit) || 1;
             const data = yield states;
             if (!data || data.length < 1) {
-                throw new bad_request_1.default('Invalid query.', 400);
+                throw new bad_request_1.default('Invalid query.');
             }
             res.status(200).json({
                 status: 'success',
@@ -93,7 +93,7 @@ function getAllLgas(req, res, next) {
             const data = yield lgas;
             // check for empty result set
             if (!data || data.length < 1) {
-                throw new bad_request_1.default('Invalid query provided...', 400);
+                throw new bad_request_1.default('Invalid query provided...');
             }
             res.status(200).json({
                 status: 'success',
@@ -132,7 +132,7 @@ function search(req, res, next) {
                     .populate('region', '-_id name');
             }
             if (!data || data === null) {
-                throw new bad_request_1.default('Invalid search key, search by state, lga or region name pls..', 400);
+                throw new bad_request_1.default('Invalid search key, search by state, lga or region name pls..');
             }
             const resType = data instanceof state_1.default
                 ? 'State'
@@ -165,7 +165,7 @@ function lgasInRegion(req, res, next) {
             });
             // check region validity
             if (!getRegion) {
-                throw new bad_request_1.default('The region is invalid....', 400);
+                throw new bad_request_1.default('The region is invalid....');
             }
             // get lgas in Region
             const totalNo = yield lga_1.default.find({
@@ -186,7 +186,7 @@ function lgasInRegion(req, res, next) {
             const noOfPages = Math.ceil(totalNo / limit) || 1;
             const data = yield lga;
             if (!data || data.length < 1) {
-                throw new bad_request_1.default('Invalid query.', 400);
+                throw new bad_request_1.default('Invalid query.');
             }
             res.status(200).json({
                 status: 'success',
@@ -219,15 +219,15 @@ function lgasInState(req, res, next) {
             const getRegionName = yield region_1.default.findOne({ _id: getState.region });
             // check region existence
             if (!getRegion) {
-                throw new bad_request_1.default('The region is invalid...', 400);
+                throw new bad_request_1.default('The region is invalid...');
             }
             // check state existence
             if (!getState) {
-                throw new bad_request_1.default('The state is invalid...', 400);
+                throw new bad_request_1.default('The state is invalid...');
             }
             // check existence of state in region
             if (!(getRegionName.name === getRegion.name)) {
-                throw new bad_request_1.default('The state dosent exist for the particular region...', 400);
+                throw new bad_request_1.default('The state dosent exist for the particular region...');
             }
             const totalNo = yield lga_1.default.find({
                 state: getState._id,
@@ -247,7 +247,7 @@ function lgasInState(req, res, next) {
             const data = yield lga;
             const noOfPages = Math.ceil(totalNo / limit) || 1;
             if (!data || data.length < 1) {
-                throw new bad_request_1.default('Invalid query.', 400);
+                throw new bad_request_1.default('Invalid query.');
             }
             res.status(200).json({
                 status: 'success',
@@ -271,13 +271,13 @@ function statesInRegion(req, res, next) {
                 name: region,
             });
             if (!getRegion) {
-                throw new bad_request_1.default('The region is invalid....', 400);
+                throw new bad_request_1.default('The region is invalid....');
             }
             const data = yield state_1.default.find({
                 region: getRegion._id,
             }).select('-lgas -__v');
             if (!data || data.length < 1) {
-                throw new bad_request_1.default('Invalid query.', 400);
+                throw new bad_request_1.default('Invalid query.');
             }
             res.status(200).json({
                 status: 'success',

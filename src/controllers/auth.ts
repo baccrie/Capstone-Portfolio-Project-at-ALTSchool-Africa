@@ -11,7 +11,7 @@ export async function signUp(req: Request, res: Response, next: NextFunction) {
     const { error } = signUpSchema.validate(req.body);
 
     if (error) {
-      throw new BadRequestError(error.details[0].message, 401);
+      throw new BadRequestError(error.details[0].message);
     }
 
     const { username, email, password } = req.body;
@@ -22,7 +22,7 @@ export async function signUp(req: Request, res: Response, next: NextFunction) {
     });
 
     if (checkUser) {
-      throw new BadRequestError('User with email already exists.', 401);
+      throw new BadRequestError('User with email already exists.');
     }
 
     // hash password and gen api-key

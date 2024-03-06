@@ -82,7 +82,7 @@ function getAllS(req, res, next) {
                 data.noOfPages = noOfPages;
                 yield redisClient.set('getAllStates', JSON.stringify(data), 'EX', 100);
                 if (!data || data.length < 1) {
-                    throw new bad_request_1.default('Invalid query.', 400);
+                    throw new bad_request_1.default('Invalid query.');
                 }
                 next();
             }
@@ -128,7 +128,7 @@ function getAllL(req, res, next) {
                 yield redisClient.set('getAllLgas', JSON.stringify(data), 'EX', 100);
                 next();
                 if (!data || data.length < 1) {
-                    throw new bad_request_1.default('Invalid query.', 400);
+                    throw new bad_request_1.default('Invalid query.');
                 }
             }
         }

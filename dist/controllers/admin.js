@@ -29,7 +29,7 @@ function createRegion(req, res, next) {
             // check if region exists
             const check = yield region_1.default.findOne({ name });
             if (check) {
-                throw new bad_request_1.default('Region with name already exists...', 400);
+                throw new bad_request_1.default('Region with name already exists...');
             }
             // else continue
             const newRegionObj = { name, description, major_ethnic_group };
@@ -60,7 +60,7 @@ function updateRegion(req, res, next) {
                 name: region,
             });
             if (!check) {
-                throw new bad_request_1.default('The region you re trying to update dosent exist!', 401);
+                throw new bad_request_1.default('The region you re trying to update dosent exist!');
             }
             // Update Region
             const updatedRegion = yield region_1.default.findOneAndUpdate({ name: region }, newRegionObj, {
@@ -88,7 +88,7 @@ function deleteRegion(req, res, next) {
                 name: region,
             });
             if (!regionToDelete || regionToDelete.length < 1) {
-                throw new bad_request_1.default('The region you re trying to delete dosent exist!', 400);
+                throw new bad_request_1.default('The region you re trying to delete dosent exist!');
             }
             //delete all lgas in region
             const reslt = yield lga_1.default.deleteMany({
@@ -124,14 +124,14 @@ function createState(req, res, next) {
             // console.log(regg);
             const regionToAddState = yield region_1.default.findOne({ name: region });
             if (!regionToAddState) {
-                throw new bad_request_1.default('the region in which you re trying to add a state is invalid...', 400);
+                throw new bad_request_1.default('the region in which you re trying to add a state is invalid...');
             }
             // check if state exists
             const check = yield state_1.default.findOne({
                 name: (0, capitalize_first_letter_1.capitalize)(req.body.name),
             });
             if (check) {
-                throw new bad_request_1.default('State with name already exists', 400);
+                throw new bad_request_1.default('State with name already exists');
             }
             const { name, capital, slogan, established, area, ethnic_groups, population, postal_code, website, coordinate, description, lgas, institutions, } = req.body;
             const queryObj = {
@@ -192,7 +192,7 @@ function updateState(req, res, next) {
                 name: region,
             });
             if (!regionToUpdateState) {
-                throw new bad_request_1.default('The region from which you re trying to update a state dosent exists!!!', 400);
+                throw new bad_request_1.default('The region from which you re trying to update a state dosent exists!!!');
             }
             // check state vallidity
             const stateToUpdate = yield state_1.default.findOne({
@@ -200,12 +200,12 @@ function updateState(req, res, next) {
                 region: regionToUpdateState._id,
             });
             if (!stateToUpdate) {
-                throw new bad_request_1.default('State dosent exist in region!!!', 400);
+                throw new bad_request_1.default('State dosent exist in region!!!');
             }
             // check if states name is not been overwritten to avoid duplicate state name
             const check = yield state_1.default.findOne({ name: queryObj.name });
             if (check) {
-                throw new bad_request_1.default('the name provided in the request body belongs to another state, pls choose another name', 400);
+                throw new bad_request_1.default('the name provided in the request body belongs to another state, pls choose another name');
             }
             //Update Lga and save
             const data = yield state_1.default.findByIdAndUpdate(stateToUpdate._id, queryObj, {
@@ -234,7 +234,7 @@ function deleteState(req, res, next) {
                 name: region,
             });
             if (!regionToDeleteState) {
-                throw new bad_request_1.default('The region from which you re trying to delete a state dosent exists!!!', 400);
+                throw new bad_request_1.default('The region from which you re trying to delete a state dosent exists!!!');
             }
             // check state vallidity
             const stateToDelete = yield state_1.default.findOne({
@@ -242,7 +242,7 @@ function deleteState(req, res, next) {
                 region: regionToDeleteState._id,
             });
             if (!stateToDelete) {
-                throw new bad_request_1.default('State dosent exist in region!!!', 400);
+                throw new bad_request_1.default('State dosent exist in region!!!');
             }
             // Delete state, delete state from region , delete all lgas with state
             const index = regionToDeleteState.states.findIndex((el) => el === stateToDelete._id);
@@ -279,19 +279,19 @@ function createLga(req, res, next) {
                 name: state,
             });
             if (!stateToAddLga) {
-                throw new bad_request_1.default('the state you re trying to create a lga for dosent exists..', 400);
+                throw new bad_request_1.default('the state you re trying to create a lga for dosent exists..');
             }
             const regionToAddLga = yield region_1.default.findOne({
                 _id: stateToAddLga.region,
             });
             //console.log(regionToAddLga);
             if (!regionToAddLga) {
-                throw new bad_request_1.default('Oops region is invalid!!', 400);
+                throw new bad_request_1.default('Oops region is invalid!!');
             }
             //console.log(regionToAddLga.states.includes(stateToAddLga._id));
             // check if state is under region
             if (!regionToAddLga.states.includes(stateToAddLga._id)) {
-                throw new bad_request_1.default('Oops, the state you re trying to create an lga for dosent exist under the specified region', 400);
+                throw new bad_request_1.default('Oops, the state you re trying to create an lga for dosent exist under the specified region');
             }
             // check if lga exists under state
             const check = yield lga_1.default.findOne({
@@ -299,7 +299,7 @@ function createLga(req, res, next) {
             });
             if (check) {
                 if (stateToAddLga.lgas.includes(check._id)) {
-                    throw new bad_request_1.default('Lga already exists in state and region!!!', 400);
+                    throw new bad_request_1.default('Lga already exists in state and region!!!');
                 }
             }
             const lga = yield lga_1.default.create({
@@ -335,7 +335,7 @@ function updateLga(req, res, next) {
                 name: state,
             });
             if (!stateToAddLga) {
-                throw new bad_request_1.default('The state from which you re trying to update a lga dosent exists!!!', 400);
+                throw new bad_request_1.default('The state from which you re trying to update a lga dosent exists!!!');
             }
             // check lga vallidity
             const lgaToUpdate = yield lga_1.default.findOne({
@@ -343,7 +343,7 @@ function updateLga(req, res, next) {
                 state: stateToAddLga._id,
             });
             if (!lgaToUpdate) {
-                throw new bad_request_1.default('Lga dosent exist in state!!!', 400);
+                throw new bad_request_1.default('Lga dosent exist in state!!!');
             }
             //Update Lga and save
             lgaToUpdate.name = name;
@@ -372,7 +372,7 @@ function deleteLga(req, res, next) {
                 name: state,
             });
             if (!stateToDeleteLga) {
-                throw new bad_request_1.default('The state from which you re trying to delete a lga dosent exists!!!', 400);
+                throw new bad_request_1.default('The state from which you re trying to delete a lga dosent exists!!!');
             }
             // check lga vallidity
             const lgaToDelete = yield lga_1.default.findOne({
@@ -381,7 +381,7 @@ function deleteLga(req, res, next) {
             });
             //console.log(lgaToDelete);
             if (!lgaToDelete) {
-                throw new bad_request_1.default('Lga dosent exist in state!!!', 400);
+                throw new bad_request_1.default('Lga dosent exist in state!!!');
             }
             // Delete lga and also delete from state
             const index = stateToDeleteLga.lgas.findIndex((el) => el === lgaToDelete._id);

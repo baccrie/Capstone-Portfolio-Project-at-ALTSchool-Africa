@@ -11,10 +11,7 @@ export default async function checkApiKey(
     const apiKey = req.headers.apikey;
 
     if (!apiKey) {
-      throw new authenticationError(
-        'api key is missing in request header',
-        401
-      );
+      throw new authenticationError('api key is missing in request header');
     }
 
     // validate key
@@ -23,7 +20,7 @@ export default async function checkApiKey(
     });
 
     if (!user) {
-      throw new authenticationError('Invalid Api Key', 401);
+      throw new authenticationError('Invalid Api Key');
     }
 
     next();

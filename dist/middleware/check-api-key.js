@@ -19,14 +19,14 @@ function checkApiKey(req, res, next) {
         try {
             const apiKey = req.headers.apikey;
             if (!apiKey) {
-                throw new unauthenticated_1.default('api key is missing in request header', 401);
+                throw new unauthenticated_1.default('api key is missing in request header');
             }
             // validate key
             const user = yield user_1.default.findOne({
                 api_key: apiKey,
             });
             if (!user) {
-                throw new unauthenticated_1.default('Invalid Api Key', 401);
+                throw new unauthenticated_1.default('Invalid Api Key');
             }
             next();
         }
