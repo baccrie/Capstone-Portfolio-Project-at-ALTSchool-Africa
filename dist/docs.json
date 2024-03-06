@@ -16,13 +16,13 @@
       "description": "production docs link"
     },
     {
-      "url": "http://localhost:8000/api/v1/nigeria",
+      "url": "http://localhost:8000",
       "description": "development docs link"
     }
   ],
 
   "paths": {
-    "/auth/signup": {
+    "/api/v1/nigeria/auth/signup": {
       "post": {
         "tags": ["Authentication"],
         "summary": "Register new user and generate api-key",
@@ -97,7 +97,7 @@
       }
     },
 
-    "/regions": {
+    "/api/v1/nigeria/regions": {
       "get": {
         "tags": ["General"],
         "summary": "Get All Regions",
@@ -402,7 +402,7 @@
       }
     },
 
-    "/states": {
+    "/api/v1/nigeria/states": {
       "get": {
         "tags": ["General"],
         "summary": "Get All States",
@@ -491,7 +491,7 @@
       }
     },
 
-    "/lgas": {
+    "/api/v1/nigeria/lgas": {
       "get": {
         "tags": ["General"],
         "summary": "Get All Lgas",
@@ -580,7 +580,7 @@
       }
     },
 
-    "/search": {
+    "/api/v1/nigeria/search": {
       "get": {
         "tags": ["Search"],
         "summary": "Search for lgas , state  or Region",
@@ -663,7 +663,7 @@
       }
     },
 
-    "/{region}/{state}/lgas": {
+    "/api/v1/nigeria/{region}/{state}/lgas": {
       "get": {
         "tags": ["Specific"],
         "summary": "Get All Lga in a state",
@@ -745,7 +745,7 @@
       }
     },
 
-    "/{region}/lgas": {
+    "/api/v1/nigeria/{region}/lgas": {
       "get": {
         "tags": ["Specific"],
         "summary": "Get All Lga in a region",
@@ -817,7 +817,7 @@
       }
     },
 
-    "/{region}/states": {
+    "/api/v1/nigeria/{region}/states": {
       "get": {
         "tags": ["Specific"],
         "summary": "Get All States in a region",
@@ -889,7 +889,7 @@
       }
     },
 
-    "/region": {
+    "/api/v1/nigeria/region": {
       "post": {
         "tags": ["Admin-Create"],
         "summary": "create a region",
@@ -959,7 +959,7 @@
       }
     },
 
-    "/{region}/state": {
+    "/api/v1/nigeria/{region}/state": {
       "post": {
         "tags": ["Admin-Create"],
         "summary": "create a state under region",
@@ -1042,7 +1042,7 @@
       }
     },
 
-    "/{state}/lga": {
+    "/api/v1/nigeria/{state}/lga": {
       "post": {
         "tags": ["Admin-Create"],
         "summary": "create a lga under state",
