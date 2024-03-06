@@ -1,0 +1,1318 @@
+openapi: 3.0.1
+info:
+  title: Locale
+  version: 0.1.0
+  description: 'Locale is a developer tool for anyone who needs to know Nigeria, geographically at least. Locale’s API shows you all of Nigeria’s regions, states, and local government areas(LGAs). Locale is looking to be a very useful tool for the thousands of businesses building for Nigeria’s 200M+ population size. '
+  contact:
+    name: Bakare Rilwan
+    email: bakarerilwan1@gmail.com
+paths:
+  /api/v1/nigeria/auth/signup:
+    post:
+      tags:
+        - Authentication
+      summary: Register new user and generate api-key
+      operationId: signUp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSignUp'
+              example:
+                username: testuser
+                email: test@testuser.com
+                password: test
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SignUpResponse'
+                  example:
+                    status: success
+                    msg: welcome on board dev testuser below is your apiKey, please keep it safe.
+                    api_key: 0iey7qmd23ta4dy4nhv6iey67bq9b8
+                title: Response Post Auth SignUp  Postt
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+                example:
+                  status: failed
+                  msg: User with email already exists.
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+                example:
+                  status: failed
+                  msg: Oops an error occured!!
+  /api/v1/nigeria/regions:
+    get:
+      tags:
+        - General
+      summary: Get All Regions
+      operationId: getRegions
+      security:
+        - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegionRes'
+                example:
+                  status: success
+                  nos: 6
+                  data:
+                    - _id: 65db320b69009b04458fb708
+                      name: North-East
+                      states:
+                        - name: Adamawa
+                          capital: Yola
+                          slogan: Land of Beauty
+                        - name: Bauchi
+                          capital: Bauchi
+                          slogan: Pearl of Tourism
+                        - name: Borno
+                          capital: Maiduguri
+                          slogan: Home of Peace
+                        - name: Gombe
+                          capital: Gombe
+                          slogan: Jewel of the Savannah
+                        - name: Taraba
+                          capital: Jalingo
+                          slogan: Nature's Gift to the Nation
+                        - name: Yobe
+                          capital: Yobe
+                          slogan: Pride of the Sahel
+                      description: The North-East region is among the largest geopolitical zones in Nigeria in terms of physical size and population. The region covers nearly a third of the entire Nigerian landmass. This zone has two major ecological regions, the tropical savanna in the west and the semi-desert ecological region in the east .Population-wise, the North-East region has about 26 million people, about 12% of the Nigerian population. The region's most populous cities are Bauchi and Maiduguri. There is a lot of pastoral farming, although not up to the scale of the Middle Belt, and there is a lot of cattle herding done also- primarily due to the presence of the Fulani Herdsmen in the region. There is quite a lot of commerce in the region, and this commerce is done both internally and with merchants who cross the border from Niger Republic, or Chad. Culturally, the Jukun, Kanuris, Tiv, and Fulani tribes have the most influence due to their numbers. These tribes were all once fierce warriors, and even today, they are not always friendly with one another, and with outsiders. The North East has faced a common security challenge Insurgents have basically set up camp in the region, and in recent times the region has been a war zone.
+                      major_ethnic_group:
+                        - Fulani, Tiv, Babur, Tangalawaja, Balewa, Kanuri, Mumuye, Fulfulde
+                    - _id: 65db320b69009b04458fb709
+                      name: North-West
+                      states:
+                        - name: Jigawa
+                          capital: Dustse
+                          slogan: The New World
+                        - name: Kaduna
+                          capital: Kaduna
+                          slogan: Centre of Learning (formerly Liberal State)
+                        - name: Kano
+                          capital: Kano
+                          slogan: Centre of Commerce
+                        - name: Katsina
+                          capital: Katsina
+                          slogan: Home of Hospitality
+                        - name: Kebbi
+                          capital: Benin-Kebbi
+                          slogan: Land of Equity
+                        - name: Sokoto
+                          capital: Sokoto
+                          slogan: Seat of the Caliphate
+                        - name: Zamfara
+                          capital: Gusau
+                          slogan: Farming is Our Pride
+                      description: "The North-West region, as its name suggests, is located in northwest Nigeria. It is among Nigeria's largest geographical zones and primarily comprised of the savanna ecological region. Much of the region is the indigenous homeland of the Hausa people who make up the largest ethnic group in northwest Nigeria. Economy-wise, the North-West zone is home to Kano City, which is a major contributor to Nigeria's economy. Most of the region's rural areas lag in terms of resource allocation, literacy levels, and security. The northwest geopolitical zone in Nigeria has the largest landmass. It covers over 200,000 kilometres square of land and about 25% of Nigeria’s total land. Interestingly, it also happens to be the most populated zone in the country. The popular cities and towns in this geopolitical zone are Zaria, Kano, Sokoto, Kaduna, Gusau, Dutse, and Birnin Kebbi. The North West is the bedrock of the Fulani Caliphate in Nigeria. Even though there are many other Ethnic Groups in the region, the Fulanis make up the vast majority. In some states, Fulanis are the only tribe in the whole area. Religion in the region is not disputable. Islam is the dominant religion, even though there are others such as Christianity in Southern Kaduna, and traditional religion all over, Islam outnumbers all the others by a wide margin. The land is quite arid, with the Sahara desert just ahead, and so pastoral farming is not really practiced at a very large scale. Instead, there is a sizable number of Cattle herders, and many others are engaged in the Armed Forces. Culturally, the domination of the Fulanis is again at the forefront, they have over the years interweaved their culture and religion. Sharia: a law code based on Islamic tenets is followed and obeyed in many areas, and according to history, the Sultan of Sokoto is first a Religious Leader before a Traditional Ruler."
+                      major_ethnic_group:
+                        - Hausa , Fulani, Maguzawa, Baju, Kanuri, Jabba, Zuru, Gbagyi
+                    - _id: 65db320b69009b04458fb70c
+                      name: South-South
+                      states:
+                        - name: Akwa-Ibom
+                          capital: Uyo
+                          slogan: Land of Promise
+                        - name: Bayelsa
+                          capital: Yenogoa
+                          slogan: Glory of All Lands
+                        - name: Cross-River
+                          capital: Calabar
+                          slogan: The People's Paradise
+                        - name: Delta
+                          capital: Asaba
+                          slogan: The Big Heart
+                        - name: Edo
+                          capital: Benin
+                          slogan: Heartbeat of The Nation
+                        - name: Rivers
+                          capital: Portharcourt
+                          slogan: Treasure Base of the Nation
+                      description: The Niger Delta region stretches across the Atlantic seaboard from the Bight of Bonny coast in the east to the Bight of Benin coast in the west. Geographically, this region occupies a mere 5% of the country's landmass. The Niger Delta is home to some of Nigeria's largest oil and natural gas deposits. The zone has a population of 26 million, accounting for about 12% of the country's population The Greater Port Harcourt is the region's largest metropolitan area, with other significant ones being Ikom Warri, Sapele, Ikot, and Ughelli. This is a leading oil-producing geopolitical zone in Nigeria. The zone is responsible for over 90% of the crude oil that is produced in the country. Only one state in this region, Cross River, is not amongst the leading oil producers. The South-South zone is made up of 6 states, namely; Edo state, Rivers state, Akwa-Ibom state, Cross River state, Delta state, and Bayelsa state. The common cities and towns in this zone are Benin, Calabar, Yenagoa, Warri, Asaba, Ekpoma, Port-Harcourt, and Uyo. The landmass of this region is less than 10% of Nigeria’s total landmass. However, they are amongst the zones that bring the most revenue to the country. The South-South is majorly a Christian region. Farming is practiced in some areas including, Delta, Cross River, and Akwa Ibom, while Rivers State, and Bayelsa, due to their proximity to the Ocean, are predominantly fishermen.
+                      major_ethnic_group:
+                        - Bini, Ogoni, Urbobo, Itsekiri, Ijaw, Ikwerre, Isoko, Annang, Efik, Ejagham, Ibibio, Esan
+                    - _id: 65db320b69009b04458fb70d
+                      name: South-West
+                      states:
+                        - name: Ekiti
+                          capital: Ado-Ekiti
+                          slogan: Land of Honour and Integrity
+                        - name: Lagos
+                          capital: Ikeja
+                          slogan: Centre of Excellence
+                        - name: Ogun
+                          capital: Abeokuta
+                          slogan: Gateway State
+                        - name: Ondo
+                          capital: Akure
+                          slogan: Sunshine State
+                        - name: Osun
+                          capital: Oshobo
+                          slogan: State of the Living Spring (formerly Land of Virtue)
+                        - name: Oyo
+                          capital: Ibadan
+                          slogan: Pace-Setter State
+                      description: The South-West region stretches along the Atlantic seaboard from the Niger Delta Zone in the east to the border with the Benin Republic in the west. The main ecological regions in this zone include the mangrove forests in the east and the south and the forest savanna in the northwest. Culturally, much of the South-West region falls in the indigenous Yorubaland. The Yoruba people are the largest ethnic group in the country's southwest. The region is home to the incredibly populous cities of Ibadan and Lagos, making it one of the busiest zones in terms of economic activity. The South-West Zone is the second most populous of all Nigeria's geopolitical zones. It is home to 47 million people, accounting for nearly 22% of the country's population. The Lagos Metropolitan Area found in this zone is the world's eighth-largest metropolitan area, with about 21 million people. Here are the states in this region. The South West is another geopolitical zone in Nigeria. The zone is also known as the Yoruba highland. Interestingly, the zone happens to have the most academicians in the country. Its inhabitants are known to be well educated. The common cities and towns in this region are; Ikeja, Ado-Ekiti, Ibadan, Banana Island, Akure, Osogbo, and Abeokuta. The major language spoken in the South West is mostly the Yoruba language. There are a few other dialects in the region, with some of them closely related to Yoruba. There is a fine balance in the South West when it comes to religion. There is good representation in both Islam and Christianity, as well as Traditional Religions. According to some analysts, however, the Yoruba people favor Islam above any other Religion. The language of communication throughout the South West is the Yoruba language. Farming is very well practiced, in the South West, even though not on a very large scale. Politically, as well as commercially, the South West has excelled in many ways, and Lagos is the economic capital of Nigeria and West Africa.
+                      major_ethnic_group:
+                        - Yoruba
+                    - _id: 65db320b69009b04458fb70a
+                      name: North-Central
+                      states:
+                        - name: Benue
+                          capital: Makurdi
+                          slogan: Food Basket of the Nation
+                        - name: Kogi
+                          capital: Lokoja
+                          slogan: The Confluence State
+                        - name: Kwara
+                          capital: Ilorin
+                          slogan: State of Harmony
+                        - name: Nasarawa
+                          capital: Lafia
+                          slogan: Home of Solid Minerals
+                        - name: Niger
+                          capital: Minna
+                          slogan: The Power State
+                        - name: Plateau
+                          capital: Jos
+                          slogan: Home of Peace and Tourism
+                      description: The Middle Belt Zone is home to Nigeria's Federal Capital Territory. This zone stretches across the country's width, from its border with Benin to where it borders Cameroon. The region's primary ecological zone is the Guinean forest-savanna mosaic, with a small western portion falling in the savanna ecoregion. This zone is home to about 20 million people, comprising around 11% of the country's population. Abuja, the country's capital, is the largest city in this zone. The populous cities of Jos and Ilorin are also part of the Middle Belt. Amongst all the geopolitical zones in Nigeria, this zone has the most diverse wide cultures living together.  In other zones in the country, the cultures are quite similar. However, in this zone, that is not the case. There are people from different tribal groups. As a result, they are so many languages that are spoken in the region. The capital of the country, Abuja, is also in this geopolitical zone. However, the FCT is not counted as a state. Some of the major cities and towns in the North Central are Jos, Illorin, Minna, Lafia, and Lokoja.
+                      major_ethnic_group:
+                        - Mada-Eggon, Igala, Tiv, Gwandara, Nupe, Igbira, Mangu, Berom, Gbagyi, people
+                    - _id: 65db320b69009b04458fb70b
+                      name: South-East
+                      states:
+                        - name: Abia
+                          capital: Umuahia
+                          slogan: God's Own State
+                        - name: Anambra
+                          capital: Awka
+                          slogan: Light of the Nation (formerly Home for All)
+                        - name: Ebonyi
+                          capital: Abakaliki
+                          slogan: Salt of the Nation
+                        - name: Enugu
+                          capital: Enugu
+                          slogan: Coal City State
+                        - name: Imo
+                          capital: Owerrri
+                          slogan: Eastern Heartland (formerly Land of Hope)
+                      description: The South-East region is bounded by the Cross River to the east, the flat North Central to the north, the riverine Niger Delta to the south, and the river Niger to the west. The main ecological regions include the forest-savanna mosaic in the north and the tropical forest to the south. Culturally, the South-East region falls within the indigenous homeland of the Igbo people, often known as Igboland. The Igbo people comprise the largest ethnic group in southeast Nigeria, accounting for close to 90% of the region's population. While this region is the smallest in terms of landmass, it is among the largest contributors to the country's economy. The region has vast natural gas and oil reserves and a remarkably industrialised economy. The South-East region is home to 22 million people, roughly 10% of the country's population. The two most populated cities in this region are Enugu and Aba, other significant ones being Owerri, Umuahia, Onitsha, and Nnewi. The southeast geopolitical zone is quite homogeneous in cultural heritage and language. This zone is one that breeds the most entrepreneurs in the country. People from this zone are mostly business-minded or traders. . The common cities and towns in this zone are Onitsha, Abakiliki, Enugu, Aba, and Owerri. The Igbo language is the predominant language in this region, and the majority of the inhabitants know how to communicate with the language. The Igbo language is the premier tool of communication in the South East, this is because the states are made up of basically the same people, although there are a number of variations in dialects available throughout the Region. The South Easterners have accepted Christianity as a general rule. Although there are other religions in small numbers, such as Jews (Judaism) and traditional believers. Farming is the major occupation in the region, although agriculture is not done on a scale similar or equal to that which is done in the Middle Belt. Igbos are merchants by nature and they generally venture into private business.
+                      major_ethnic_group:
+                        - igbos
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+                example:
+                  status: failed
+                  msg: api key is missing in request header
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/v1/nigeria/states:
+    get:
+      tags:
+        - General
+      summary: Get All States
+      operationId: getStates
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            title: Limit
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            title: Page
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateRes'
+                example:
+                  status: success
+                  nos: 36
+                  noOfPages: 1
+                  data: []
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+                example:
+                  status: failed
+                  msg: api key is missing in request header
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/v1/nigeria/lgas:
+    get:
+      tags:
+        - General
+      summary: Get All Lgas
+      operationId: getLgas
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            title: Limit
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            title: Page
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LgaRes'
+                example:
+                  status: success
+                  nos: 768
+                  noOfPages: 1
+                  data: []
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+                example:
+                  status: failed
+                  msg: api key is missing in request header
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/v1/nigeria/search:
+    get:
+      tags:
+        - Search
+      summary: Search for lgas , state  or Region
+      operationId: search
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: keyword
+          in: query
+          required: true
+          schema:
+            type: string
+            title: Search
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+                example:
+                  status: success
+                  msg: Found result in <category>
+                  data: []
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+                example:
+                  status: failed
+                  msg: Invalid search key, search by state, lga or region name pls..
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+                example:
+                  status: failed
+                  msg: api key is missing in request header
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/v1/nigeria/{region}/{state}/lgas:
+    get:
+      tags:
+        - Specific
+      summary: Get All Lga in a state
+      operationId: getStateLgas
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: region
+          in: path
+          required: true
+          description: Enter region name
+          schema:
+            type: string
+            title: region
+        - name: state
+          in: path
+          required: true
+          description: Enter state name
+          schema:
+            type: string
+            title: state
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LgaRes'
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/v1/nigeria/{region}/lgas:
+    get:
+      tags:
+        - Specific
+      summary: Get All Lga in a region
+      operationId: getRegionLgas
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: region
+          in: path
+          description: Enter region name
+          required: true
+          schema:
+            type: string
+            title: region
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LgaRes'
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/v1/nigeria/{region}/states:
+    get:
+      tags:
+        - Specific
+      summary: Get All States in a region
+      operationId: getRegionStates
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: region
+          in: path
+          required: true
+          description: Enter region name
+          schema:
+            type: string
+            title: region
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateRes'
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/v1/nigeria/region:
+    post:
+      tags:
+        - Admin-Create
+      summary: create a region
+      operationId: postRegion
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRegion'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRegionRes'
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/v1/nigeria/{region}/state:
+    post:
+      tags:
+        - Admin-Create
+      summary: create a state under region
+      operationId: postState
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: region
+          in: path
+          description: Enter region name
+          required: true
+          schema:
+            type: string
+            title: region
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateState'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateStateRes'
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/v1/nigeria/{state}/lga:
+    post:
+      tags:
+        - Admin-Create
+      summary: create a lga under state
+      operationId: postLga
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: state
+          in: path
+          required: true
+          description: Enter state name
+          schema:
+            type: string
+            title: state
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLga'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateLgaRes'
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/v1/nigeria/update/region/{region}:
+    patch:
+      tags:
+        - Admin-Update
+      summary: Update a Region
+      operationId: patchRegion
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: region
+          in: path
+          description: Enter name of region
+          required: true
+          schema:
+            type: string
+            title: region
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRegion'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRegionRes'
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/v1/nigeria/update/state/{region}/{state}:
+    patch:
+      tags:
+        - Admin-Update
+      summary: update state info in a region
+      operationId: patchState
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: region
+          in: path
+          description: Enter name of region
+          required: true
+          schema:
+            type: string
+            title: region
+        - name: state
+          in: path
+          description: Enter name of state
+          required: true
+          schema:
+            type: string
+            title: state
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateState'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateStateRes'
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/v1/nigeria/update/lga/{state}/{lga}:
+    patch:
+      tags:
+        - Admin-Update
+      summary: update lga in state
+      operationId: patchLga
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: state
+          in: path
+          description: Enter name of state
+          required: true
+          schema:
+            type: string
+            title: state
+        - name: lga
+          in: path
+          description: Enter name of lga
+          required: true
+          schema:
+            type: string
+            title: lga
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLga'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateLgaRes'
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/v1/nigeria/delete/region/{region}:
+    delete:
+      tags:
+        - Admin-Delete
+      summary: delete region
+      operationId: deleteRegion
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: region
+          in: path
+          description: Enter name of region
+          required: true
+          schema:
+            type: string
+            title: region
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRes'
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/v1/nigeria/delete/state/{region}/{state}:
+    delete:
+      tags:
+        - Admin-Delete
+      summary: delete state
+      operationId: deleteState
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: region
+          in: path
+          required: true
+          description: Enter name of region
+          schema:
+            type: string
+            title: region
+        - name: state
+          in: path
+          required: true
+          description: Enter name of state
+          schema:
+            type: string
+            title: state
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRes'
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/v1/nigeria/delete/lga/{state}/{lga}:
+    delete:
+      tags:
+        - Admin-Delete
+      summary: delete lga
+      operationId: deleteLga
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: state
+          in: path
+          required: true
+          description: Enter name of state
+          schema:
+            type: string
+            title: state
+        - name: lga
+          in: path
+          required: true
+          description: Enter name of lga
+          schema:
+            type: string
+            title: lga
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRes'
+        '400':
+          description: BadRequest Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+components:
+  schemas:
+    RegionRes:
+      properties:
+        status:
+          type: string
+          title: status
+        nos:
+          type: integer
+          title: nos
+        data:
+          items:
+            $ref: '#/components/schemas/Region'
+          type: array
+          title: data
+    StateRes:
+      properties:
+        status:
+          type: string
+          title: status
+        nos:
+          type: integer
+          title: nos
+        data:
+          items:
+            $ref: '#/components/schemas/State'
+          type: array
+          title: data
+    LgaRes:
+      properties:
+        status:
+          type: string
+          title: status
+        nos:
+          type: integer
+          title: nos
+        data:
+          items:
+            $ref: '#/components/schemas/Lga'
+          type: array
+          title: data
+    CreateRegionRes:
+      properties:
+        status:
+          type: string
+          title: status
+        data:
+          items:
+            $ref: '#/components/schemas/Region'
+          type: object
+          title: data
+    CreateStateRes:
+      properties:
+        status:
+          type: string
+          title: status
+        data:
+          items:
+            $ref: '#/components/schemas/State'
+          type: object
+          title: data
+    CreateLgaRes:
+      properties:
+        status:
+          type: string
+          title: status
+        data:
+          items:
+            $ref: '#/components/schemas/Lga'
+          type: object
+          title: data
+    Region:
+      properties:
+        name:
+          type: string
+          title: name
+        states:
+          items:
+            $ref: '#/components/schemas/State'
+          type: array
+          title: states
+        description:
+          type: string
+          title: description
+        major_ethnic_group:
+          items:
+            type: string
+          type: array
+          title: major_ethnic_group
+      type: object
+      required:
+        - name
+        - states
+        - description
+        - major_ethnic_group
+    State:
+      properties:
+        name:
+          type: string
+          title: capital
+        capital:
+          type: string
+          title: capital
+        slogan:
+          type: string
+          title: slogan
+        established:
+          type: string
+          title: established
+        area:
+          type: string
+          title: area
+        postal_code:
+          type: string
+          title: postal_code
+        website:
+          type: string
+          title: website
+        coordinate:
+          type: string
+          title: coordinate
+        region:
+          $ref: '#/components/schemas/Region'
+        population:
+          type: object
+          title: population
+        description:
+          type: string
+          title: descriptions
+        ethnic_groups:
+          items:
+            type: string
+          type: array
+          title: ethnic_groups
+        lgas:
+          items:
+            type: string
+          type: array
+          title: lgas
+        institutions:
+          items:
+            type: string
+          type: array
+          title: institutions
+      type: object
+      required:
+        - name
+        - capital
+        - slogan
+        - established
+        - area
+        - ethnic_groups
+        - population
+        - region
+        - postal_code
+        - website
+        - coordinate
+        - description
+        - lgas
+        - institutions
+      title: Post
+    Lga:
+      properties:
+        name:
+          type: string
+          title: name
+        state:
+          type: object
+          title: state
+        region:
+          type: object
+          title: region
+      type: object
+      required:
+        - name
+        - state
+        - region
+    User:
+      properties:
+        username:
+          type: string
+          title: username
+        email:
+          type: string
+          title: email
+        password:
+          type: string
+          title: password
+      type: object
+      required:
+        - username
+        - email
+        - password
+    UserSignUp:
+      properties:
+        username:
+          type: string
+          title: username
+        email:
+          type: string
+          title: email
+        password:
+          type: string
+          title: password
+      type: object
+      required:
+        - username
+        - email
+        - Password
+      title: UserSignup
+    SignUpResponse:
+      properties:
+        status:
+          type: string
+          title: status
+        msg:
+          type: string
+          title: msg
+        api_key:
+          type: string
+          title: api_key
+      type: object
+      required:
+        - username
+        - email
+        - Password
+      title: SignUpResponse
+    SearchResponse:
+      properties:
+        status:
+          type: string
+          title: status
+          description: success
+        msg:
+          type: string
+          title: msg
+        data:
+          type: object
+          title: data
+      type: object
+      required:
+        - status
+        - msg
+        - data
+      title: SearchResponse
+    CreateRegion:
+      properties:
+        name:
+          type: string
+          title: username
+        description:
+          type: string
+          title: email
+        major_ethnic_group:
+          items:
+            type: string
+          type: array
+          title: major_ethnic_group
+      type: object
+      required:
+        - name
+        - description
+      title: CreateRegion
+    CreateState:
+      properties:
+        name:
+          type: string
+          title: username
+        capital:
+          type: string
+          title: capital
+        slogan:
+          type: string
+          title: slogan
+        established:
+          type: string
+          title: established
+        area:
+          type: string
+          title: area
+        postal_code:
+          type: string
+          title: postal_code
+        website:
+          type: string
+          title: website
+        coordinate:
+          type: string
+          title: coordinate
+        population:
+          type: object
+          title: population
+        description:
+          type: string
+          title: descriptions
+        ethnic_groups:
+          items:
+            type: string
+          type: array
+          title: ethnic_groups
+        institutions:
+          items:
+            type: string
+          type: array
+          title: institutions
+      type: object
+      required:
+        - name
+        - description
+      title: CreateRegion
+    CreateLga:
+      properties:
+        name:
+          type: string
+          title: username
+      type: object
+      required:
+        - name
+        - region
+      title: CreateLga
+    DeleteRes:
+      properties:
+        status:
+          type: string
+          title: status
+        msg:
+          type: string
+          title: status
+      type: object
+      title: DeleteRes
+    BadRequestError:
+      properties:
+        status:
+          type: string
+          title: status
+        msg:
+          type: string
+          title: status
+      type: object
+      title: BadRequestError
+    AuthenticationError:
+      properties:
+        status:
+          type: string
+          title: status
+        msg:
+          type: string
+          title: status
+      type: object
+      title: AuthenticationError
+    ServerError:
+      properties:
+        status:
+          type: string
+          title: status
+        msg:
+          type: string
+          title: status
+      type: object
+      title: ServerError
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apikey

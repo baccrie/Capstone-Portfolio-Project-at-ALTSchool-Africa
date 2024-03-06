@@ -1,4 +1,4 @@
-// node modules
+// third party modules
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import cors from 'cors';
@@ -7,7 +7,7 @@ require('dotenv').config({ path: '../.env' });
 import { connectDB } from './db/connect';
 import swaggerUi from 'swagger-ui-express';
 
-// third party modules
+// self modules
 import localeRouter from './routes/locale';
 import authRouter from './routes/auth';
 import adminRouter from './routes/admin';
@@ -33,10 +33,11 @@ const limiter = rateLimit({
 });
 
 // middlewares
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
-app.use(express.json());
-app.use(cors());
+app.set('trust proxy', 1);
 app.use(limiter);
+app.use(cors());
+app.use(express.json());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
 
 // endpoints
 app.use('/api/v1/nigeria', authRouter);

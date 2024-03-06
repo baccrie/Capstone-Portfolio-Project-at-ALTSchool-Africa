@@ -4,16 +4,21 @@
     "title": "Locale",
     "version": "0.1.0",
     "description": "Locale is a developer tool for anyone who needs to know Nigeria, geographically at least. Locale’s API shows you all of Nigeria’s regions, states, and local government areas(LGAs). Locale is looking to be a very useful tool for the thousands of businesses building for Nigeria’s 200M+ population size. ",
-    "github-repo": "https://www.github.com/baccrie/Capstone-Portfolio-Project-at-ALTSchool-Africa",
     "contact": {
       "name": "Bakare Rilwan",
       "email": "bakarerilwan1@gmail.com"
     }
   },
 
+  "servers": [
+    {
+      "url": "http://localhost:8000/api/v1/nigeria",
+      "description": "dev docs link"
+    }
+  ],
+
   "paths": {
-    "/api/v1/nigeria/auth/signup": {
-      "url": "/",
+    "/auth/signup": {
       "post": {
         "tags": ["Authentication"],
         "summary": "Register new user and generate api-key",
@@ -88,7 +93,7 @@
       }
     },
 
-    "/api/v1/nigeria/regions": {
+    "/regions": {
       "get": {
         "tags": ["General"],
         "summary": "Get All Regions",
@@ -393,7 +398,7 @@
       }
     },
 
-    "/api/v1/nigeria/states": {
+    "/states": {
       "get": {
         "tags": ["General"],
         "summary": "Get All States",
@@ -482,7 +487,7 @@
       }
     },
 
-    "/api/v1/nigeria/lgas": {
+    "/lgas": {
       "get": {
         "tags": ["General"],
         "summary": "Get All Lgas",
@@ -571,7 +576,7 @@
       }
     },
 
-    "/api/v1/nigeria/search": {
+    "/search": {
       "get": {
         "tags": ["Search"],
         "summary": "Search for lgas , state  or Region",
@@ -654,7 +659,7 @@
       }
     },
 
-    "/api/v1/nigeria/{region}/{state}/lgas": {
+    "/{region}/{state}/lgas": {
       "get": {
         "tags": ["Specific"],
         "summary": "Get All Lga in a state",
@@ -736,7 +741,7 @@
       }
     },
 
-    "/api/v1/nigeria/{region}/lgas": {
+    "/{region}/lgas": {
       "get": {
         "tags": ["Specific"],
         "summary": "Get All Lga in a region",
@@ -808,7 +813,7 @@
       }
     },
 
-    "/api/v1/nigeria/{region}/states": {
+    "/{region}/states": {
       "get": {
         "tags": ["Specific"],
         "summary": "Get All States in a region",
@@ -880,7 +885,7 @@
       }
     },
 
-    "/api/v1/nigeria/region": {
+    "/region": {
       "post": {
         "tags": ["Admin-Create"],
         "summary": "create a region",
@@ -950,7 +955,7 @@
       }
     },
 
-    "/api/v1/nigeria/{region}/state": {
+    "/{region}/state": {
       "post": {
         "tags": ["Admin-Create"],
         "summary": "create a state under region",
@@ -1033,7 +1038,7 @@
       }
     },
 
-    "/api/v1/nigeria/{state}/lga": {
+    "/{state}/lga": {
       "post": {
         "tags": ["Admin-Create"],
         "summary": "create a lga under state",
@@ -1117,7 +1122,7 @@
       }
     },
 
-    "/api/v1/nigeria/update/region/{region}": {
+    "/update/region/{region}": {
       "patch": {
         "tags": ["Admin-Update"],
         "summary": "Update a Region",
@@ -1201,7 +1206,7 @@
       }
     },
 
-    "/api/v1/nigeria/update/state/{region}/{state}": {
+    "/update/state/{region}/{state}": {
       "patch": {
         "tags": ["Admin-Update"],
         "summary": "update state info in a region",
@@ -1296,7 +1301,7 @@
       }
     },
 
-    "/api/v1/nigeria/update/lga/{state}/{lga}": {
+    "/update/lga/{state}/{lga}": {
       "patch": {
         "tags": ["Admin-Update"],
         "summary": "update lga in state",
@@ -1391,7 +1396,7 @@
       }
     },
 
-    "/api/v1/nigeria/delete/region/{region}": {
+    "/delete/region/{region}": {
       "delete": {
         "tags": ["Admin-Delete"],
         "summary": "delete region",
@@ -1464,7 +1469,7 @@
       }
     },
 
-    "/api/v1/nigeria/delete/state/{region}/{state}": {
+    "/delete/state/{region}/{state}": {
       "delete": {
         "tags": ["Admin-Delete"],
         "summary": "delete state",
@@ -1548,7 +1553,7 @@
       }
     },
 
-    "/api/v1/nigeria/delete/lga/{state}/{lga}": {
+    "/delete/lga/{state}/{lga}": {
       "delete": {
         "tags": ["Admin-Delete"],
         "summary": "delete lga",
