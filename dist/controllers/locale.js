@@ -26,6 +26,9 @@ function getAllRegions(req, res, next) {
             const data = yield region_1.default.find()
                 .select('-__v')
                 .populate('states', '-_id name capital slogan');
+            if (!data || data.length < 1) {
+                throw new bad_request_1.default('No Region found.');
+            }
             res.status(200).json({
                 status: 'success',
                 nos: data.length,
@@ -58,7 +61,7 @@ function getAllStates(req, res, next) {
             const noOfPages = Math.ceil(totalNo / limit) || 1;
             const data = yield states;
             if (!data || data.length < 1) {
-                throw new bad_request_1.default('Invalid query.');
+                throw new bad_request_1.default('No State found.');
             }
             res.status(200).json({
                 status: 'success',
@@ -93,7 +96,7 @@ function getAllLgas(req, res, next) {
             const data = yield lgas;
             // check for empty result set
             if (!data || data.length < 1) {
-                throw new bad_request_1.default('Invalid query provided...');
+                throw new bad_request_1.default('No Lga found.');
             }
             res.status(200).json({
                 status: 'success',

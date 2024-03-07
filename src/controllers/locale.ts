@@ -23,6 +23,10 @@ export async function getAllRegions(
       .select('-__v')
       .populate('states', '-_id name capital slogan');
 
+      if (!data || data.length < 1) {
+        throw new BadRequestError('No Region found.');
+      }
+
     res.status(200).json({
       status: 'success',
       nos: data.length,
@@ -61,7 +65,7 @@ export async function getAllStates(
     const data = await states;
 
     if (!data || data.length < 1) {
-      throw new BadRequestError('Invalid query.');
+      throw new BadRequestError('No State found.');
     }
 
     res.status(200).json({
@@ -103,7 +107,7 @@ export async function getAllLgas(
 
     // check for empty result set
     if (!data || data.length < 1) {
-      throw new BadRequestError('Invalid query provided...');
+      throw new BadRequestError('No Lga found.');
     }
 
     res.status(200).json({

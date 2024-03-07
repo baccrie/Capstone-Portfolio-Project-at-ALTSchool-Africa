@@ -13,6 +13,7 @@ import authRouter from './routes/auth';
 import adminRouter from './routes/admin';
 import { errorHandler } from './middleware/error-handler';
 import { notFound } from './middleware/not-found';
+import User from './models/user';
 
 import { populateRegion } from './populate/populate-region';
 import { populateStateAndLga } from './populate/populate-state';

@@ -1,13 +1,14 @@
 import request from 'supertest';
-import app from '../../app';
-import mongoose from 'mongoose';
-import { connectDB } from '../../db/connect';
-import User from '../../models/user';
-import dropDatabase from '../jest.teardown';
-import { connectToDatabase } from '../jest.setup';
-import Region from '../../models/region';
-import State from '../../models/state';
-import Lga from '../../models/lga';
+import app from '../app';
+import dropDatabase from './jest.teardown';
+import { connectToDatabase } from './jest.setup';
+
+
+import genApiKey from "../utils/generate-api-key";
+import { capitalize, trim } from "../utils/capitalize-first-letter";
+
+
+
 
 require('dotenv').config({ path: '../../../.env' });
 
@@ -235,3 +236,165 @@ describe('Update Region, State and Lga endpoints', () => {
     //expect(res.body.data.description).toBe('Testing post region endpoints');
   });
 });
+
+// describe('Delete Region, State and Lga endpoints', () => {
+//   it('should delete a region', async () => {
+//     const res = await request(app)
+//       .delete('/api/v1/nigeria/delete/region/TestED-REGION')
+//       .set('apikey', '82hikjenf719&#Y*@!IKN877y');
+//     expect(res.status).toBe(200);
+//     expect(res.body.status).toBe('success');
+//     expect(res.body.msg).toBe('Region successfully deleted');
+//   });
+
+//   it('should delete a state', async () => {
+//     const res = await request(app)
+//       .delete('/api/v1/nigeria/delete/state/TestED-REGION/DriftmarK')
+//       .set('apikey', '82hikjenf719&#Y*@!IKN877y');
+//     expect(res.status).toBe(200);
+//     expect(res.body.status).toBe('success');
+//     expect(res.body.data.name).toBe('Driftmark');
+//   });
+//   it('should delete a lga', async () => {
+//     const res = await request(app)
+//       .delete('/api/v1/nigeria/delete/lga/Driftmark/Storms-End')
+//       .set('apikey', '82hikjenf719&#Y*@!IKN877y');
+//     expect(res.status).toBe(200);
+//     expect(res.body.status).toBe('success');
+//     expect(res.body.data.name).toBe('Storms-End');
+//   });
+// });
+
+
+// Test Auth
+
+describe('Authentication', () => {
+  it('should return a BadRequest response (invalid email)', async () => {
+    const response = await request(app)
+      .post('/api/v1/nigeria/auth/signup')
+      .set('apikey', '82hikjenf719&#Y*@!IKN877y')
+      .send({
+        username: 'testuser',
+        email: 'testtestuser.com',
+        password: 'test',
+      });
+    expect(response.status).toBe(400);
+    expect(response.body.status).toBe('failed')
+    expect(response.body.msg).toBe("\"email\" must be a valid email");
+  });
+
+  it('should return a BadRequest response (missing field)', async () => {
+    const response = await request(app)
+      .post('/api/v1/nigeria/auth/signup')
+      .set('apikey', '82hikjenf719&#Y*@!IKN877y')
+      .send({
+        username: 'testuser',
+        email: 'test@testuser.com'
+      });
+    expect(response.status).toBe(400);
+    expect(response.body.status).toBe('failed')
+    expect(response.body.msg).toBe("\"password\" is required");
+  });
+
+  it('should return a BadRequest response (duplicate email prohibited))', async () => {
+    const response = await request(app)
+      .post('/api/v1/nigeria/auth/signup')
+      .set('apikey', '82hikjenf719&#Y*@!IKN877y')
+      .send({
+        username: 'testuser',
+        email: 'test@testuser.com',
+        password: 'test'
+      });
+    expect(response.status).toBe(400);
+    expect(response.body.status).toBe('failed')
+    expect(response.body.msg).toBe("User with email already exists.");
+  });
+
+  it('should signup new user and generate apikey)', async () => {
+    const response = await request(app)
+      .post('/api/v1/nigeria/auth/signup')
+      .set('apikey', '82hikjenf719&#Y*@!IKN877y')
+      .send({
+        username: 'testuser',
+        email: 'testing@testuser.com',
+        password: 'test'
+      });
+
+    expect(response.status).toBe(201);
+    expect(response.body.status).toBe('success')
+    expect(response.body.msg).toBe("welcome on board dev testuser below is your apiKey, please keep it safe.");
+  });
+});
+
+// Search Endpoints Errors
+
+describe('Search Endpoint Errors', () => {
+
+  it('should return a badrequest response (invalid search keyword)', async () => {
+    const keyword = 'Dothraki';
+
+    const response = await request(app)
+      .get(`/api/v1/nigeria/search?keyword=${keyword}`)
+      .set('apikey', '82hikjenf719&#Y*@!IKN877y');
+    expect(response.status).toBe(400);
+    expect(response.body.status).toBe('failed')
+    expect(response.body.msg).toBe('Invalid search key, search by state, lga or region name pls..');
+  });
+}); 
+
+// Specific Endpoints Errors
+describe('Search Endpoint Errors', () => {
+
+  it('should return a Badrequest (region is invalid)', async () => {
+    const state = 'Lagos';
+    const region = 'South North';
+
+    const response = await request(app)
+      .get(`/api/v1/nigeria/${region}/${state}/lgas`)
+      .set('apikey', '82hikjenf719&#Y*@!IKN877y');
+    expect(response.status).toBe(400);
+    expect(response.body.status).toBe('failed')
+    expect(response.body.msg).toBe('The region is invalid...')
+  });
+
+  it('should return a Badrequest (region is invalid)', async () => {
+    const state = 'Okoko';
+    const region = 'North-East';
+
+    const response = await request(app)
+      .get(`/api/v1/nigeria/${region}/${state}/lgas`)
+      .set('apikey', '82hikjenf719&#Y*@!IKN877y');
+    expect(response.status).toBe(500);
+  });
+
+  it('should return a BadRequest(invalid region)', async () => {
+    const region = 'South North';
+
+    const response = await request(app)
+      .get(`/api/v1/nigeria/${region}/lgas`)
+      .set('apikey', '82hikjenf719&#Y*@!IKN877y');
+      expect(response.status).toBe(400);
+      expect(response.body.status).toBe('failed')
+      expect(response.body.msg).toBe('The region is invalid....')
+  });
+
+  it('should return a BadRequest(invalid region)', async () => {
+    const region = 'South Centrall';
+
+    const response = await request(app)
+      .get(`/api/v1/nigeria/${region}/states`)
+      .set('apikey', '82hikjenf719&#Y*@!IKN877y');
+      expect(response.status).toBe(400);
+      expect(response.body.status).toBe('failed')
+      expect(response.body.msg).toBe('The region is invalid....')
+  });
+}); 
+
+// utility  func
+
+describe('Capitalize string', () => {
+  it('should capitalize first letter of string and trim', async () => {
+    const res = capitalize('North-CENTRAL')
+    expect(res).toBe('North-Central')
+  })
+})

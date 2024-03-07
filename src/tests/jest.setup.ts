@@ -36,10 +36,10 @@ export const connectToDatabase = async () => {
 
   // await create a test user with api key
   await User.create({
-    _id: '65db4c5428e883e3affcc6c8',
     username: 'baccrie',
     email: 'test@test.com',
     password: '3injwed9$ghwjU&buhwbOInq67u92h8',
     api_key: '82hikjenf719&#Y*@!IKN877y',
+    is_superUser: true,
   });
 };
