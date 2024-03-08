@@ -21,11 +21,12 @@ const port: any = process.env.REDIS_PORT
 
 
 const redisClient  = new Redis({
-  username,
+  //username,
   host,
-  password: password,
+  //password: password,
   port,
-  tls
+  //tls,
+  commandTimeout: 1000
 });
 
 // locale endpoints
