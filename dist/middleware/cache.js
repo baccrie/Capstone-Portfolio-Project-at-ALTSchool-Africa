@@ -26,11 +26,12 @@ const host = process.env.REDIS_HOST;
 const password = process.env.REDIS_PASSWORD;
 const port = process.env.REDIS_PORT;
 const redisClient = new ioredis_1.default({
-    username,
+    //username,
     host,
-    password: password,
+    //password: password,
     port,
-    tls
+    //tls,
+    commandTimeout: 1000
 });
 // locale endpoints
 // general endpoints
