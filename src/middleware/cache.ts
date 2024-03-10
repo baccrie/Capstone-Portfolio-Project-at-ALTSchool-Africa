@@ -13,12 +13,6 @@ interface retData {
 }
 
 const  REDIS_URL:any  = process.env.REDIS_URL;
-const tls: any = true
-const username: any = process.env.REDIS_SERVICE_NAME
-const host: any = process.env.REDIS_HOST
-const password:any = process.env.REDIS_PASSWORD
-const port: any = process.env.REDIS_PORT
-
 
 const redisClient  = new Redis(REDIS_URL);
 
