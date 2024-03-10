@@ -10,17 +10,6 @@
     }
   },
 
-  "servers": [
-    {
-      "url": "https://capstone-portfolio-project-at-altschool.onrender.com/",
-      "description": "production docs link"
-    },
-    {
-      "url": "http://localhost:8000",
-      "description": "development docs link"
-    }
-  ],
-
   "paths": {
     "/api/v1/nigeria/auth/signup": {
       "post": {
