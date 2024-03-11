@@ -271,7 +271,7 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
 
 #### i. get all lgas in a state
 
-- ```url
+- ```c
   http://localhost:8000/api/v1/nigeria/{region}/{state}/lgas
   ```
 
@@ -292,7 +292,7 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
 
 #### ii. get all lgas in a region
 
-- ```url
+- ```c
   http://localhost:8000/api/v1/nigeria/{region}/lgas
   ```
 
@@ -314,8 +314,8 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
 
 #### iii. get all states in a region
 
-- ```url
-  $ http://localhost:8000/api/v1/nigeria/{region}/states
+- ```c
+  http://localhost:8000/api/v1/nigeria/{region}/states
   ```
 
 - response
@@ -351,9 +351,8 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
 
 ## Code Snippets
 
-- ```js
-  app.ts;
-  ```
+```js
+app.ts;
 
 // middlewares
 app.set('trust proxy', 1);
@@ -369,30 +368,31 @@ app.use('/api/v1/nigeria', checkApiKey, adminRouter);
 
 // test api
 app.get('/', (req, res) => {
-res.status(200).json({
-message: 'api working...',
+  res.status(200).json({
+    message: 'api working...',
+  });
 });
-});
+```
 
-````
-
-```js
-custome - error.js;
+- ```js
+  custom - error.js;
+  ```
 
 export interface CustomError extends Error {
-  message: string;
-  statusCode: number;
+message: string;
+statusCode: number;
 }
 
 export default class customApiError extends Error {
-  statusCode: number;
-  message: any;
+statusCode: number;
+message: any;
 
-  constructor(message: string, statusCode: number) {
-    super(message);
-    this.statusCode = statusCode;
-  }
+constructor(message: string, statusCode: number) {
+super(message);
+this.statusCode = statusCode;
 }
+}
+
 ````
 
 ## Documentation
@@ -452,3 +452,4 @@ export default class customApiError extends Error {
 ```
 
 ```
+````
