@@ -1750,7 +1750,7 @@
 
           "states": {
             "items": {
-              "$ref": "#/components/schemas/State"
+              "type": "object"
             },
             "type": "array",
             "title": "states"

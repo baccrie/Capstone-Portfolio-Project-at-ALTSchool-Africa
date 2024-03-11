@@ -23,8 +23,8 @@ const app = (0, express_1.default)();
 const PORT = process.env.PORT;
 // rate limiter
 const limiter = (0, express_rate_limit_1.default)({
-    // max of 30 request per minute
-    max: 30,
+    // max of 20 request per minute
+    max: 20,
     windowMs: 60 * 1000,
     message: 'Too many requests',
 });

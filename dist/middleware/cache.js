@@ -20,11 +20,6 @@ const state_1 = __importDefault(require("../models/state"));
 // errors
 const bad_request_1 = __importDefault(require("../errors/bad-request"));
 const REDIS_URL = process.env.REDIS_URL;
-const tls = true;
-const username = process.env.REDIS_SERVICE_NAME;
-const host = process.env.REDIS_HOST;
-const password = process.env.REDIS_PASSWORD;
-const port = process.env.REDIS_PORT;
 const redisClient = new ioredis_1.default(REDIS_URL);
 // locale endpoints
 // general endpoints

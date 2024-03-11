@@ -1,8 +1,8 @@
 # Locale API
 
-Locale is a developer tool for anyone who needs to know Nigeria, geographically at least. Locale’s API shows you all of Nigeria’s regions, states, and local government areas(LGAs). Locale is looking to be a very useful tool for the thousands of businesses building for Nigeria’s 200M+ population size. ",
+Locale is a developer tool for anyone who needs to know Nigeria, geographically at least. Locale’s API shows you all of Nigeria’s regions, states, and local government areas(LGAs). Locale is looking to be a very useful tool for the thousands of businesses building for Nigeria’s 200M+ population size.
 
-This is an Locale Application built using Node.js and express framework, which provides geographical information, specifically for regions, states and local governments and several other metadatas.
+The Application is built using Node.js and express framework using MongoDB, which provides geographical information, specifically for regions, states and local governments and several other metadatas.
 
 This API uses a database of location data and a caching mechanism for better performance. You will need an API key for authorization. The API endpoints and functionality can be found below.
 
@@ -77,7 +77,7 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
 #### 1. The swagger documentation of the project can be accessed by preceeding the base url with /api-docs see example below
 
 - ```c
-  $ http://localhost:8000/api/v1/api-docs
+  $ http://localhost:8000/api-docs
   ```
 
 #### 2. The state schema contains a population property which is an Object and returns 3 key value pairs.
@@ -109,7 +109,7 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
 
 ### 1. Auth Endpoint
 
-- all other endpoints are protected and therefore requires an apikey header with the name "apikey" for authorization, this auth key can be generated once, after signup with the auth signup endpoint below.
+- all other endpoints are protected and therefore requires an apikey in req header with the name "apikey" for authorization, this auth key can be generated once after signup with the auth signup endpoint below.
 
   #### i. signup user and generate apikey for subsequent request access to other protected endpoints.
 
@@ -144,7 +144,7 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
   - Limit - limits the no of result
   - Page - display result on a particular page depending on the limit
 
-  #### i. get all regions and associated states metadata
+#### i. get all regions and associated states metadata
 
 - ```c
   $ http://localhost:8000/api/v1/nigeria/regions
@@ -222,9 +222,9 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
 
 #### iii. get all lgas
 
-```c
-$ http://localhost:8000/api/v1/nigeria/lgas
-```
+- ```c
+  $ http://localhost:8000/api/v1/nigeria/lgas
+  ```
 
 - response data
   ```json
@@ -248,7 +248,7 @@ $ http://localhost:8000/api/v1/nigeria/lgas
   - keyword - the keyword to search , it can either be a Region, State or Lga
 
   ```c
-  $ http://localhost:8000/api/v1/nigeria/search?keyword=Abuja
+  http://localhost:8000/api/v1/nigeria/search?keyword=Abuja
   ```
 
 - response data
@@ -271,9 +271,9 @@ $ http://localhost:8000/api/v1/nigeria/lgas
 
 #### i. get all lgas in a state
 
-```c
-$ http://localhost:8000/api/v1/nigeria/{region}/{state}/lgas
-```
+- ```url
+  http://localhost:8000/api/v1/nigeria/{region}/{state}/lgas
+  ```
 
 - response
   ```json
@@ -292,12 +292,13 @@ $ http://localhost:8000/api/v1/nigeria/{region}/{state}/lgas
 
 #### ii. get all lgas in a region
 
-```c
-$ http://localhost:8000/api/v1/nigeria/{region}/states
-```
+- ```url
+  http://localhost:8000/api/v1/nigeria/{region}/lgas
+  ```
 
 - response
-  ```json
+
+- ```json
   {
     "status": "string",
     "nos": 0,
@@ -313,9 +314,9 @@ $ http://localhost:8000/api/v1/nigeria/{region}/states
 
 #### iii. get all states in a region
 
-```c
-$ http://localhost:8000/api/v1/nigeria/{region}/lgas
-```
+- ```url
+  $ http://localhost:8000/api/v1/nigeria/{region}/states
+  ```
 
 - response
   ```json
@@ -413,6 +414,18 @@ export default class customApiError extends Error {
     </p>
 
 - #### images
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
 
 ```
 

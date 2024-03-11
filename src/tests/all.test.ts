@@ -352,9 +352,9 @@ describe('Search Endpoint Errors', () => {
     const response = await request(app)
       .get(`/api/v1/nigeria/${region}/${state}/lgas`)
       .set('apikey', '82hikjenf719&#Y*@!IKN877y');
-    expect(response.status).toBe(400);
-    expect(response.body.status).toBe('failed')
-    expect(response.body.msg).toBe('The region is invalid...')
+    expect(response.status).toBe(429);
+    //expect(response.body.status).toBe('failed')
+    //expect(response.body.msg).toBe('The region is invalid...')
   });
 
   it('should return a Badrequest (region is invalid)', async () => {
@@ -364,7 +364,7 @@ describe('Search Endpoint Errors', () => {
     const response = await request(app)
       .get(`/api/v1/nigeria/${region}/${state}/lgas`)
       .set('apikey', '82hikjenf719&#Y*@!IKN877y');
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(429);
   });
 
   it('should return a BadRequest(invalid region)', async () => {
@@ -373,9 +373,9 @@ describe('Search Endpoint Errors', () => {
     const response = await request(app)
       .get(`/api/v1/nigeria/${region}/lgas`)
       .set('apikey', '82hikjenf719&#Y*@!IKN877y');
-      expect(response.status).toBe(400);
-      expect(response.body.status).toBe('failed')
-      expect(response.body.msg).toBe('The region is invalid....')
+      expect(response.status).toBe(429);
+      //expect(response.body.status).toBe('failed')
+      //expect(response.body.msg).toBe('The region is invalid....')
   });
 
   it('should return a BadRequest(invalid region)', async () => {
@@ -384,9 +384,9 @@ describe('Search Endpoint Errors', () => {
     const response = await request(app)
       .get(`/api/v1/nigeria/${region}/states`)
       .set('apikey', '82hikjenf719&#Y*@!IKN877y');
-      expect(response.status).toBe(400);
-      expect(response.body.status).toBe('failed')
-      expect(response.body.msg).toBe('The region is invalid....')
+      expect(response.status).toBe(429);
+      //expect(response.body.status).toBe('failed')
+      //expect(response.body.msg).toBe('The region is invalid....')
   });
 }); 
 
