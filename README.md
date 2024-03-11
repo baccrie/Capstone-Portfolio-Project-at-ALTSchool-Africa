@@ -99,7 +99,7 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
 
 #### 3. Data Caching
 
-- Owing to the fact that most of the routes requires a path parameter ,and response data might change on each request depending on this paramter, provided by the enduser. Caching was only adopted for the 3 general endpoints which are shown below.
+- Owing to the fact that most of the routes requires a path parameter and response data might change on each request depending on this paramter, provided by the enduser. Caching was only adopted for the 3 general endpoints which are shown below.
 
 - ```c
   $ http://localhost:8000/api/v1/nigeria/regions
@@ -374,26 +374,24 @@ app.get('/', (req, res) => {
 });
 ```
 
-- ```js
-  custom - error.js;
-  ```
+```js
+custom - error.js;
 
 export interface CustomError extends Error {
-message: string;
-statusCode: number;
+  message: string;
+  statusCode: number;
 }
 
 export default class customApiError extends Error {
-statusCode: number;
-message: any;
+  statusCode: number;
+  message: any;
 
-constructor(message: string, statusCode: number) {
-super(message);
-this.statusCode = statusCode;
+  constructor(message: string, statusCode: number) {
+    super(message);
+    this.statusCode = statusCode;
+  }
 }
-}
-
-````
+```
 
 ## Documentation
 
@@ -452,4 +450,7 @@ this.statusCode = statusCode;
 ```
 
 ```
-````
+
+```
+
+```
