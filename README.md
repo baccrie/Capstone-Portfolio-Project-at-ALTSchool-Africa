@@ -241,7 +241,7 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
   }
   ```
 
-### 3. Search
+### 3. Search Endpoint
 
 - note - accept one required query paramater,
 
@@ -351,8 +351,9 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
 
 ## Code Snippets
 
-```js
-app.ts;
+- ```js
+  app.ts;
+  ```
 
 // middlewares
 app.set('trust proxy', 1);
@@ -368,11 +369,12 @@ app.use('/api/v1/nigeria', checkApiKey, adminRouter);
 
 // test api
 app.get('/', (req, res) => {
-  res.status(200).json({
-    message: 'api working...',
-  });
+res.status(200).json({
+message: 'api working...',
 });
-```
+});
+
+````
 
 ```js
 custome - error.js;
@@ -391,7 +393,7 @@ export default class customApiError extends Error {
     this.statusCode = statusCode;
   }
 }
-```
+````
 
 ## Documentation
 
