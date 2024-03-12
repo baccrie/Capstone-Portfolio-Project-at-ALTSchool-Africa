@@ -77,7 +77,7 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
 #### 1. The swagger documentation of the project can be accessed by preceeding the base url with /api-docs see example below
 
 - ```c
-  $ http://localhost:8000/api-docs
+  http://localhost:8000/api-docs
   ```
 
 #### 2. The state schema contains a population property which is an Object and returns 3 key value pairs.
@@ -102,10 +102,14 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
 - Owing to the fact that most of the routes requires a path parameter and response data might change on each request depending on this paramter, provided by the enduser. Caching was only adopted for the 3 general endpoints which are shown below.
 
 - ```c
-  $ http://localhost:8000/api/v1/nigeria/regions
-  $ http://localhost:8000/api/v1/nigeria/states
-  $ http://localhost:8000/api/v1/nigeria/lgas
+  http://localhost:8000/api/v1/nigeria/regions
+  http://localhost:8000/api/v1/nigeria/states
+  http://localhost:8000/api/v1/nigeria/lgas
   ```
+
+#### 4. Rate Limiting
+
+- Max of 20 requests per minutes was implented for the api to avoid overloading of the server.
 
 ### 1. Auth Endpoint
 
@@ -114,7 +118,7 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
   #### i. signup user and generate apikey for subsequent request access to other protected endpoints.
 
   ```c
-  $ http://localhost:8000/api/v1/nigeria/auth/signup
+  http://localhost:8000/api/v1/nigeria/auth/signup
   ```
 
 - request payload
@@ -147,7 +151,7 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
 #### i. get all regions and associated states metadata
 
 - ```c
-  $ http://localhost:8000/api/v1/nigeria/regions
+  http://localhost:8000/api/v1/nigeria/regions
   ```
 
 - response data
@@ -186,7 +190,7 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
 #### ii. get all states and associated lgas metadata
 
 - ```c
-  $ http://localhost:8000/api/v1/nigeria/states
+  http://localhost:8000/api/v1/nigeria/states
   ```
 
 - response data
@@ -223,7 +227,7 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
 #### iii. get all lgas
 
 - ```c
-  $ http://localhost:8000/api/v1/nigeria/lgas
+  http://localhost:8000/api/v1/nigeria/lgas
   ```
 
 - response data
@@ -412,7 +416,3 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
      <p align="center">
       <img src="./img/Screenshot%20from%202024-02-25%2008-22-54.png">
     </p>
-
-```
-
-```

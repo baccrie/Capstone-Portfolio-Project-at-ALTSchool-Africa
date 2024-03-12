@@ -1,4 +1,4 @@
-// third party modules
+// express  modules
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import cors from 'cors';
@@ -13,10 +13,7 @@ import authRouter from './routes/auth';
 import adminRouter from './routes/admin';
 import { errorHandler } from './middleware/error-handler';
 import { notFound } from './middleware/not-found';
-import User from './models/user';
 
-import { populateRegion } from './populate/populate-region';
-import { populateStateAndLga } from './populate/populate-state';
 
 let openApiDocumentation = require('./docs.json');
 import checkApiKey from './middleware/check-api-key';
