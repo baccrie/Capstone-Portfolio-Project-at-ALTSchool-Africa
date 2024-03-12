@@ -351,47 +351,47 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
 
 ## Code Snippets
 
-```js
-app.ts;
+- ```js
+  // app.ts
 
-// middlewares
-app.set('trust proxy', 1);
-app.use(limiter);
-app.use(cors());
-app.use(express.json());
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
+  // middlewares
+  app.set('trust proxy', 1);
+  app.use(limiter);
+  app.use(cors());
+  app.use(express.json());
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
 
-// endpoints
-app.use('/api/v1/nigeria', authRouter);
-app.use('/api/v1/nigeria', checkApiKey, localeRouter);
-app.use('/api/v1/nigeria', checkApiKey, adminRouter);
+  // endpoint
+  app.use('/api/v1/nigeria', authRouter);
+  app.use('/api/v1/nigeria', checkApiKey, localeRouter);
+  app.use('/api/v1/nigeria', checkApiKey, adminRouter);
 
-// test api
-app.get('/', (req, res) => {
-  res.status(200).json({
-    message: 'api working...',
+  // test api
+  app.get('/', (req, res) => {
+    res.status(200).json({
+      message: 'api working...',
+    });
   });
-});
-```
+  ```
 
-```js
-custom - error.js;
+- ```js
+  // custom - error.js;
 
-export interface CustomError extends Error {
-  message: string;
-  statusCode: number;
-}
-
-export default class customApiError extends Error {
-  statusCode: number;
-  message: any;
-
-  constructor(message: string, statusCode: number) {
-    super(message);
-    this.statusCode = statusCode;
+  export interface CustomError extends Error {
+    message: string;
+    statusCode: number;
   }
-}
-```
+
+  export default class customApiError extends Error {
+    statusCode: number;
+    message: any;
+
+    constructor(message: string, statusCode: number) {
+      super(message);
+      this.statusCode = statusCode;
+    }
+  }
+  ```
 
 ## Documentation
 
@@ -412,44 +412,6 @@ export default class customApiError extends Error {
      <p align="center">
       <img src="./img/Screenshot%20from%202024-02-25%2008-22-54.png">
     </p>
-
-- #### images
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
 
 ```
 
