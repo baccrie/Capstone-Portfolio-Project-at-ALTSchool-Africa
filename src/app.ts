@@ -1,4 +1,4 @@
-// express  modules
+// express thirdparty modules
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import cors from 'cors';
@@ -7,12 +7,13 @@ require('dotenv').config({ path: '../.env' });
 import { connectDB } from './db/connect';
 import swaggerUi from 'swagger-ui-express';
 
-// self modules
+// local modules
 import localeRouter from './routes/locale';
 import authRouter from './routes/auth';
 import adminRouter from './routes/admin';
 import { errorHandler } from './middleware/error-handler';
 import { notFound } from './middleware/not-found';
+import User from './models/user'
 
 
 let openApiDocumentation = require('./docs.json');
@@ -45,7 +46,7 @@ app.use('/api/v1/nigeria', checkApiKey, adminRouter);
 // test api
 app.get('/', (req, res) => {
   res.status(200).json({
-    message: 'api working...',
+    message: 'api is working...',
   });
 });
 

@@ -111,6 +111,10 @@ steps 1 - 5 above must have been implemented otherwise running the test would th
 
 - Max of 20 requests per minutes was implented for the api to avoid overloading of the server.
 
+#### 4. Admin-Delete Endpoints
+
+- Deleting data on the api (Region, State or Lga) requires super_user privileges.
+
 ### 1. Auth Endpoint
 
 - all other endpoints are protected and therefore requires an apikey in req header with the name "apikey" for authorization, this auth key can be generated once after signup with the auth signup endpoint below.
